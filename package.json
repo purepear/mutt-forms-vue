@@ -1,5 +1,5 @@
 {
-  "name": "@boughtbymany/mutt-forms-vue",
+  "name": "mutt-forms-vue",
   "description": "Mutt forms - VueJS integration",
   "version": "0.4.15",
   "author": "Bought By Many <dev@boughtbymany.com>",
