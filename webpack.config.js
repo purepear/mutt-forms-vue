@@ -6,7 +6,7 @@ function resolve(dir) {
 }
 
 module.exports = {
-    entry: './test/playground/main.js',
+    entry: ['babel-polyfill', './test/playground/main.js'],
     output: {
         path: resolve('dist'),
         publicPath: '/dist/',
