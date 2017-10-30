@@ -45,6 +45,9 @@ export default {
                         'SECOND'
                     ]
                 },
+                radioBooleanField: {
+                    type: 'boolean'
+                },
                 arrayField: {
                     type: 'array',
                     minItems: 2,
@@ -86,6 +89,14 @@ export default {
                     radioField: {
                         label: 'Radio Field',
                         widget: 'radio'
+                    },
+                    radioBooleanField: {
+                        label: 'Radio Boolean Field',
+                        widget: 'radio',
+                        choices : [
+                            [ true, "A - True" ],
+                            [ false, "B - False" ]
+                        ]
                     },
                     arrayField: {
                         label: 'Array Field'
