@@ -39,6 +39,6 @@ export const WidgetProxy = {
 export const DataProxy = function() {
     return {
         errors: null,
-        value: ''
+        value: null
     }
 }
