@@ -1,7 +1,7 @@
 {
   "name": "mutt-forms-vue",
   "description": "Mutt forms - VueJS integration",
-  "version": "0.4.15",
+  "version": "0.4.17",
   "author": "Bought By Many <dev@boughtbymany.com>",
   "license": "MIT",
   "main": "src/main.js",
@@ -24,7 +24,7 @@
   "dependencies": {
     "moment": "2.18.1",
     "mutt-forms": "^1.4.x",
-    "vue": "^2.3.4"
+    "vue": "^2.5.2"
   },
   "devDependencies": {
     "babel-env": "^2.4.1",
@@ -50,21 +50,22 @@
     "mocha-jsdom": "^1.1.0",
     "mocha-webpack": "^0.7.0",
     "vue-loader": "^12.2.1",
-    "vue-template-compiler": "^2.3.4",
+    "vue-template-compiler": "^2.5.x",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5"
   },
   "babel": {
+    "babelrc": false,
     "presets": [
-        "env",
-        "react",
-        "stage-0"
+      "env",
+      "react",
+      "stage-0"
     ],
     "plugins": [
-        "transform-class-properties",
-        "transform-decorators",
-        "transform-react-constant-elements",
-        "transform-react-inline-elements"
+      "transform-class-properties",
+      "transform-decorators",
+      "transform-react-constant-elements",
+      "transform-react-inline-elements"
     ]
   }
 }
