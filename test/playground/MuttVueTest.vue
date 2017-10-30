@@ -25,7 +25,6 @@ export default {
         )
     },
     mounted() {
-        console.log('HERE')
         this.form.populate({
             textField: 'Populated!'
         })

@@ -27,10 +27,11 @@
     "vue": "^2.5.2"
   },
   "devDependencies": {
-    "babel-env": "^2.4.1",
-    "babel-eslint": "^7.2.3",
-    "babel-loader": "^6.4.1",
-    "babel-register": "^6.24.1",
+    "babel-eslint": "^8.0.1",
+    "babel-loader": "^7.1.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-0": "^6.24.1",
     "chai": "^3.5.0",
     "cross-env": "^3.0.0",
     "css-loader": "^0.25.0",
@@ -58,14 +59,7 @@
     "babelrc": false,
     "presets": [
       "env",
-      "react",
       "stage-0"
-    ],
-    "plugins": [
-      "transform-class-properties",
-      "transform-decorators",
-      "transform-react-constant-elements",
-      "transform-react-inline-elements"
     ]
   }
 }
