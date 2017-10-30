@@ -17,23 +17,26 @@
 
 export default {
     name: 'mutt-vue',
-    props: ['schema', 'options'],
-    created: function() {
+    props: [ 'schema', 'options' ],
+    created() {
         this.form = new this.$mutt(
             this.schema,
             this.options
         )
     },
-    mounted: function() {
-        debugger
+    mounted() {
+        console.log('HERE')
+        this.form.populate({
+            textField: 'Populated!'
+        })
     },
-    data: function() {
+    data() {
         return {
             form: null
         }
     },
     methods: {
-        submit: function() {
+        submit() {
             console.log('Form Submitted!!')
             this.form.validate()
             // this.form.submit()

@@ -13,6 +13,7 @@ export const WidgetProxy = {
     },
 
     setValue(value) {
+        console.log('HERE 123', value)
         this.value = value
     },
 
