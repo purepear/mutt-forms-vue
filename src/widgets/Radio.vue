@@ -45,7 +45,10 @@ export default {
             if(this.field.options.hasOwnProperty('choices')) {
                 this.field.choices = this.field.options.choices
             } else {
-                this.field.choices = [[true, 'Yes'], [false, 'No']]
+                this.field.choices = [
+                    [ true, 'Yes' ],
+                    [ false, 'No' ]
+                ]
             }
         }
 
@@ -57,6 +60,8 @@ export default {
             return 'mutt-field mutt-field-radio'
         },
         callback(choice, label) {
+            this.value = choice
+
             if(this.field.validate()) {
                 this.$emit('callback', {
                     action: 'radioSelect',
