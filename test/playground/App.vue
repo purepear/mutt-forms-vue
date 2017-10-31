@@ -12,7 +12,8 @@
 <script>
 
 // TEST LAYOUT
-import MuttVue from '../../src/Form.vue'
+//import MuttVue from '../../src/Form.vue'
+import MuttVue from './MuttVueTest.vue'
 
 export default {
     name: 'app',
@@ -117,7 +118,10 @@ export default {
             },
             data: {
                 textField: 'Testing!!',
-                textareaField: 'Testing some more!'
+                textareaField: 'Testing some more!',
+                objectField: {
+                    firstName: 'Test first name!'
+                }
             }
         }
     }
