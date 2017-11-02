@@ -24,6 +24,7 @@ export default {
         HelpWidget
     },
     created() {
+        this.value = this.field.value
         this.field.widget = this
     },
     data: DataProxy,

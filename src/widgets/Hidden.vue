@@ -16,6 +16,7 @@ export default {
     name: 'mutt-hidden',
     props: [ 'field' ],
     created() {
+        this.value = this.field.value
         this.field.widget = this
     },
     data: DataProxy,

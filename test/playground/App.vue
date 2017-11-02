@@ -67,6 +67,21 @@ export default {
                         }
                     }
                 },
+                arrayObjField: {
+                    type: 'array',
+                    minItems: 2,
+                    items: {
+                        type: 'object',
+                        properties: {
+                            firstName: {
+                                type: 'string'
+                            },
+                            lastName: {
+                                type: 'string'
+                            }
+                        }
+                    }
+                },
                 hiddenField: {
                     type: 'string'
                 }
@@ -117,11 +132,34 @@ export default {
                 }
             },
             data: {
-                textField: 'Testing!!',
+                textField: 'Testing 123',
                 textareaField: 'Testing some more!',
                 objectField: {
-                    firstName: 'Test first name!'
-                }
+                    firstName: 'Test first name!',
+                    lastName: 'Test last name'
+                },
+                arrayField: [
+                    'First',
+                    'Second'
+                ],
+                arrayObjField: [
+                    {
+                        firstName: 'FIRST NAME',
+                        lastName: 'LAST NAME'
+                    },
+                    {
+                        firstName: 'SECOND FIRST NAME',
+                        lastName: 'THIRD LAST NAME'
+                    },
+                    {
+                        firstName: 'FORTH FIRST NAME',
+                        lastName: 'FORTH LAST NAME'
+                    },
+                    {
+                        firstName: 'ANOTHER FIRST NAME',
+                        lastName: 'ANOTHER LAST NAME'
+                    }
+                ]
             }
         }
     }

@@ -27,7 +27,6 @@ export default {
     mounted() {
         if(this.data) {
             this.form.populate(this.data)
-            debugger
         }
     },
     data() {
