@@ -7,7 +7,7 @@
             v-bind:fieldId="getFieldId()"></label-widget>
         <input
             type="checkbox"
-            :class="getFieldClass()"
+            v-bind:class="getFieldClass()"
             v-bind:name="field.name"
             v-bind:id="field.name"
             v-bind:value="value"

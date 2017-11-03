@@ -1,5 +1,5 @@
 <template>
-    <div v-if="field" :class="getFieldWrapperClass()">
+    <div v-if="field" class="mutt-field-wrapper--checkbox mutt-field-wrapper--radio" :class="getFieldWrapperClass()">
         <label-widget
             v-bind:field="field"
             v-bind:fieldId="getFieldId()"></label-widget>
