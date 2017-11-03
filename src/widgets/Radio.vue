@@ -2,7 +2,8 @@
     <div v-if="field" class="mutt-field-wrapper--checkbox mutt-field-wrapper--radio" :class="getFieldWrapperClass()">
         <label-widget
             v-bind:field="field"
-            v-bind:fieldId="getFieldId()"></label-widget>
+            v-bind:fieldId="getFieldId()"
+            v-bind:class="getLabelClass"></label-widget>
         <div v-for="choice of field.choices" class="mutt-field-radio-item">
             <input
                 type="radio"
@@ -52,6 +53,14 @@ export default {
         this.field.widget = this
     },
     data: DataProxy,
+    computed: {
+        getLabelClass() {
+            return {
+                'mutt-label': true,
+                'mutt-field-checkbox-checked': this.value
+            }
+        }
+    },
     methods: Object.assign({}, WidgetProxy, {
         getFieldClass() {
             return 'mutt-field mutt-field-radio'
