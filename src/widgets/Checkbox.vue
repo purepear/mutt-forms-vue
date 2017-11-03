@@ -1,13 +1,13 @@
 <template>
-    <div v-if="field" :class="getFieldWrapperClass()">
+    <div v-if="field" class="mutt-field-wrapper--checkbox" :class="getFieldWrapperClass()">
         <label-widget
             v-bind:for="field.name"
-            v-bind:field="field"
+            v-bind:field="field"            
             v-bind:class="getLabelClass"
             v-bind:fieldId="getFieldId()"></label-widget>
         <input
             type="checkbox"
-            :class="getFieldClass()"
+            v-bind:class="getFieldClass()"
             v-bind:name="field.name"
             v-bind:id="field.name"
             v-bind:value="value"

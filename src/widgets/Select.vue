@@ -3,7 +3,7 @@
         <label-widget
             v-bind:field="field"
             v-bind:fieldId="getFieldId()"></label-widget>
-        <div class="mutt-field-choice-wrap">
+        <div class="mutt-field-choice-wrap select">
             <select type="text"
                 :class="getFieldClass()"
                 v-bind:name="field.name"
