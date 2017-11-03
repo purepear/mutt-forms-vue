@@ -7,7 +7,7 @@
             <input
                 type="radio"
                 v-model="value"
-                v-bind:name="`${field.id}-${choice[0]}`"
+                v-bind:name="field.id"
                 v-bind:id="`${field.id}-${choice[0]}`"
                 v-bind:value="choice[0]"
                 v-bind:class="getFieldClass()"
