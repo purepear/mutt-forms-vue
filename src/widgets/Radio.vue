@@ -2,8 +2,7 @@
     <div v-if="field" class="mutt-field-wrapper--checkbox mutt-field-wrapper--radio" :class="getFieldWrapperClass()">
         <label-widget
             v-bind:field="field"
-            v-bind:fieldId="getFieldId()"
-            v-bind:class="getLabelClass"></label-widget>
+            v-bind:fieldId="getFieldId()"></label-widget>
         <div v-for="choice of field.choices" class="mutt-field-radio-item">
             <input
                 type="radio"
