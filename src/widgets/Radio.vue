@@ -2,16 +2,17 @@
     <div v-if="field" class="mutt-field-wrapper--checkbox mutt-field-wrapper--radio" :class="getFieldWrapperClass()">
         <label-widget
             v-bind:field="field"
-            v-bind:fieldId="getFieldId()"></label-widget>
+            v-bind:fieldId="getFieldId()"
+            v-bind:class="getLabelClass"></label-widget>
         <div v-for="choice of field.choices" class="mutt-field-radio-item">
             <input
                 type="radio"
                 v-model="value"
-                v-bind:name="`${field.id}-${choice[0]}`"
+                v-bind:name="field.id"
                 v-bind:id="`${field.id}-${choice[0]}`"
                 v-bind:value="choice[0]"
                 v-bind:class="getFieldClass()"
-                v-on:click="callback(choice[0], choice[1])">
+                v-on:change="callback(choice[0], choice[1])">
             <label
                 v-bind:for="`${field.id}-${choice[0]}`"
                 class="mutt-label">{{ choice[1] }}</label>
