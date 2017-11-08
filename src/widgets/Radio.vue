@@ -50,6 +50,11 @@ export default {
         }
 
         this.field.widget = this
+
+        // set default
+        if(this.field.options.hasOwnProperty('default')) {
+            this.value = this.field.options.default
+        }
     },
     data: DataProxy,
     methods: Object.assign({}, WidgetProxy, {
