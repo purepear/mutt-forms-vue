@@ -3,7 +3,11 @@
         <label-widget
             v-bind:field="field"
             v-bind:fieldId="getFieldId()"></label-widget>
+        <readonly-widget
+            v-if="field.options.readonly"
+            v-bind:value="value"></readonly-widget>
         <textarea
+            v-if="!field.options.readonly"
             ref="textarea"
             :class="getFieldClass()"
             v-bind:name="field.name"
@@ -21,6 +25,7 @@
 import LabelWidget from './helpers/Label.vue'
 import ErrorWidget from './helpers/Error.vue'
 import HelpWidget from './helpers/Help.vue'
+import ReadonlyWidget from './helpers/Readonly.vue'
 import { WidgetProxy, DataProxy } from '../utils'
 
 export default {
@@ -29,7 +34,8 @@ export default {
     components: {
         LabelWidget,
         ErrorWidget,
-        HelpWidget
+        HelpWidget,
+        ReadonlyWidget
     },
     created() {
         this.field.widget = this

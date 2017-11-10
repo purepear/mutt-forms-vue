@@ -3,8 +3,12 @@
         <label-widget
             v-bind:field="field"
             v-bind:fieldId="getFieldId()"></label-widget>
-        <div v-for="choice of field.choices" class="mutt-field-radio-item">
+        <div v-for="(choice, index) of field.choices" class="mutt-field-radio-item">
+            <readonly-widget
+                v-if="field.options.readonly"
+                v-bind:value="choice[1]"></readonly-widget>
             <input
+                v-if="!field.options.readonly"
                 type="radio"
                 v-model="value"
                 v-bind:name="field.id"
@@ -13,6 +17,7 @@
                 v-bind:class="getFieldClass()"
                 v-on:change="callback(choice[0], choice[1])">
             <label
+                v-if="!field.options.readonly"
                 v-bind:for="`${field.id}-${choice[0]}`"
                 class="mutt-label">{{ choice[1] }}</label>
         </div>
@@ -28,6 +33,7 @@
 import LabelWidget from './helpers/Label.vue'
 import ErrorWidget from './helpers/Error.vue'
 import HelpWidget from './helpers/Help.vue'
+import ReadonlyWidget from './helpers/Readonly.vue'
 import { WidgetProxy, DataProxy } from '../utils'
 
 export default {
@@ -36,7 +42,8 @@ export default {
     components: {
         LabelWidget,
         ErrorWidget,
-        HelpWidget
+        HelpWidget,
+        ReadonlyWidget
     },
     created() {
         // Booleans do not have choices, so we must contrive

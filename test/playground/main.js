@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from './App.vue'
+import App from './AppReadOnly.vue'
 import MuttVue from '../../src/main'
 
 Vue.use(MuttVue, {})

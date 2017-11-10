@@ -3,17 +3,20 @@
         <label-widget
             v-bind:field="field"
             v-bind:fieldId="getFieldId()"></label-widget>
-        <div class="mutt-field-choice-wrap select">
-            <select type="text"
-                :class="getFieldClass()"
-                v-bind:name="field.name"
-                v-model="value">
-                <option value="">Please select one</option>
-                <option
-                    v-for="(option, index) in field.choices"
-                    :value="option[0]">{{ option[1] }}</option>
-            </select>
-        </div>
+        <readonly-widget
+            v-if="field.options.readonly"
+            v-bind:value="field.value"></readonly-widget>
+        <select
+            v-if="!field.options.readonly"
+            type="text"
+            :class="getFieldClass()"
+            v-bind:name="field.name"
+            v-model="value">
+            <option value="">Please select one</option>
+            <option
+                v-for="(option, index) in field.choices"
+                :value="option[0]">{{ option[1] }}</option>
+        </select>
         <help-widget v-bind:field="field"></help-widget>
         <error-widget
             v-bind:field="field"
@@ -26,6 +29,7 @@
 import LabelWidget from './helpers/Label.vue'
 import ErrorWidget from './helpers/Error.vue'
 import HelpWidget from './helpers/Help.vue'
+import ReadonlyWidget from './helpers/Readonly.vue'
 import { WidgetProxy, DataProxy } from '../utils'
 
 export default {
@@ -34,7 +38,8 @@ export default {
     components: {
         LabelWidget,
         ErrorWidget,
-        HelpWidget
+        HelpWidget,
+        ReadonlyWidget
     },
     created() {
         this.field.widget = this
