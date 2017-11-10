@@ -6,17 +6,19 @@
         <readonly-widget
             v-if="field.options.readonly"
             v-bind:value="field.value"></readonly-widget>
-        <select
-            v-if="!field.options.readonly"
-            type="text"
-            :class="getFieldClass()"
-            v-bind:name="field.name"
-            v-model="value">
-            <option value="">Please select one</option>
-            <option
-                v-for="(option, index) in field.choices"
-                :value="option[0]">{{ option[1] }}</option>
-        </select>
+        <div class="mutt-field-choice-wrap select">
+            <select
+                v-if="!field.options.readonly"
+                type="text"
+                :class="getFieldClass()"
+                v-bind:name="field.name"
+                v-model="value">
+                <option value="">Please select one</option>
+                <option
+                    v-for="(option, index) in field.choices"
+                    :value="option[0]">{{ option[1] }}</option>
+            </select>
+        </div>
         <help-widget v-bind:field="field"></help-widget>
         <error-widget
             v-bind:field="field"
