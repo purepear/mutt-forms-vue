@@ -17,7 +17,6 @@
                 v-for="(option, index) in field.choices"
                 :value="option[0]">{{ option[1] }}</option>
         </select>
-        </span>
         <help-widget v-bind:field="field"></help-widget>
         <error-widget
             v-bind:field="field"

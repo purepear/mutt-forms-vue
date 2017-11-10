@@ -1,5 +1,5 @@
 <template>
-    <div v-if="field" :class="getFieldWrapperClass()">
+    <div v-if="field" class="mutt-field-wrapper--checkbox mutt-field-wrapper--radio" :class="getFieldWrapperClass()">
         <label-widget
             v-bind:field="field"
             v-bind:fieldId="getFieldId()"></label-widget>
@@ -11,12 +11,11 @@
                 v-if="!field.options.readonly"
                 type="radio"
                 v-model="value"
-                v-bind:name="`${field.id}-${choice[0]}`"
+                v-bind:name="field.id"
                 v-bind:id="`${field.id}-${choice[0]}`"
                 v-bind:value="choice[0]"
                 v-bind:class="getFieldClass()"
-                v-on:click="callback(choice[0], choice[1])">
-            </span>
+                v-on:change="callback(choice[0], choice[1])">
             <label
                 v-if="!field.options.readonly"
                 v-bind:for="`${field.id}-${choice[0]}`"
@@ -58,6 +57,11 @@ export default {
         }
 
         this.field.widget = this
+
+        // set default
+        if(this.field.options.hasOwnProperty('default')) {
+            this.value = this.field.options.default
+        }
     },
     data: DataProxy,
     methods: Object.assign({}, WidgetProxy, {
