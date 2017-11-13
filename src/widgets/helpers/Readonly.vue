@@ -1,5 +1,5 @@
 <template>
-    <div class="mutt-readonly" v-html="value"></div>
+    <span class="mutt-readonly" v-html="value"></span>
 </template>
 
 <script>

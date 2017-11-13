@@ -5,6 +5,7 @@
             v-bind:schema="schema"
             v-bind:options="options"
             v-bind:data="data"
+            v-bind:readonly="readonly"
             ></mutt-vue>
     </div>
 </template>
@@ -21,8 +22,12 @@ export default {
     },
     data() {
         return {
+            readonly: false,
             schema: {
                 textField: {
+                    type: 'string'
+                },
+                textField1: {
                     type: 'string'
                 },
                 textareaField: {
@@ -72,6 +77,9 @@ export default {
                     textField: {
                         label: 'Text Field',
                         required: true
+                    },
+                    textField1: {
+                        label: 'Text Field 1'
                     },
                     textareaField: {
                         label: 'Textarea Field',

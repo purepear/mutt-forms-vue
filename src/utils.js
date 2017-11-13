@@ -2,12 +2,36 @@
 * Utilities
 */
 
+import LabelWidget from './widgets/helpers/Label.vue'
+import ErrorWidget from './widgets/helpers/Error.vue'
+import HelpWidget from './widgets/helpers/Help.vue'
+import ReadonlyWidget from './widgets/helpers/Readonly.vue'
+
 /**
 * Proxies
 * For convience, we proxy the widget and data methods (they are
 * always the same)
 */
-export const WidgetProxy = {
+export const PropsProxy = {
+    field: {
+        type: Object,
+        required: true
+    },
+    readonly: {
+        type: Boolean,
+        default: false
+    }
+}
+
+export const DataProxy = function() {
+    return {
+        displayReadonly: false,
+        errors: null,
+        value: ''
+    }
+}
+
+export const MethodProxy = {
     getValue() {
         return this.value
     },
@@ -35,9 +59,24 @@ export const WidgetProxy = {
     }
 }
 
-export const DataProxy = function() {
-    return {
-        errors: null,
-        value: ''
+export const MuttWidgetProxy = {
+    props: PropsProxy,
+    data: DataProxy,
+    methods: MethodProxy,
+    components: {
+        LabelWidget,
+        ErrorWidget,
+        HelpWidget,
+        ReadonlyWidget
+    },
+    created() {
+        this.field.widget = this
+
+        // Copy this prop as we may need to alter/overide it
+        this.displayReadonly = this.readonly
+
+        if(this.field.options.hasOwnProperty('readonly')) {
+            this.displayReadonly = this.field.options.readonly
+        }
     }
 }

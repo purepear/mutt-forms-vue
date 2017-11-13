@@ -1,14 +1,16 @@
 <template>
-    <div v-if="field" class="mutt-field-wrapper--checkbox mutt-field-wrapper--radio" :class="getFieldWrapperClass()">
+    <div
+        v-if="field"
+        class="mutt-field-wrapper--checkbox mutt-field-wrapper--radio"
+        :class="getFieldWrapperClass()">
         <label-widget
             v-bind:field="field"
             v-bind:fieldId="getFieldId()"></label-widget>
-        <div v-for="(choice, index) of field.choices" class="mutt-field-radio-item">
-            <readonly-widget
-                v-if="field.options.readonly"
-                v-bind:value="choice[1]"></readonly-widget>
+        <div
+            v-if="!displayReadonly"
+            v-for="(choice, index) of field.choices"
+            class="mutt-field-radio-item">
             <input
-                v-if="!field.options.readonly"
                 type="radio"
                 v-model="value"
                 v-bind:name="field.id"
@@ -17,12 +19,15 @@
                 v-bind:class="getFieldClass()"
                 v-on:change="callback(choice[0], choice[1])">
             <label
-                v-if="!field.options.readonly"
                 v-bind:for="`${field.id}-${choice[0]}`"
                 class="mutt-label">{{ choice[1] }}</label>
         </div>
+        <readonly-widget
+            v-if="displayReadonly"
+            v-bind:value="field.value"></readonly-widget>
         <help-widget v-bind:field="field"></help-widget>
         <error-widget
+            v-if="!displayReadonly"
             v-bind:field="field"
             v-bind:errors="errors"
             v-bind:errorClass="getErrorClass()"></error-widget>
@@ -30,21 +35,10 @@
 </template>
 
 <script>
-import LabelWidget from './helpers/Label.vue'
-import ErrorWidget from './helpers/Error.vue'
-import HelpWidget from './helpers/Help.vue'
-import ReadonlyWidget from './helpers/Readonly.vue'
-import { WidgetProxy, DataProxy } from '../utils'
+import { MuttWidgetProxy, MethodProxy } from '../utils'
 
-export default {
+export default Object.assign({}, MuttWidgetProxy, {
     name: 'mutt-radio',
-    props: [ 'field' ],
-    components: {
-        LabelWidget,
-        ErrorWidget,
-        HelpWidget,
-        ReadonlyWidget
-    },
     created() {
         // Booleans do not have choices, so we must contrive
         // them if they aren't already set
@@ -56,15 +50,21 @@ export default {
             }
         }
 
-        this.field.widget = this
-
-        // set default
+        // Set the default value
         if(this.field.options.hasOwnProperty('default')) {
             this.value = this.field.options.default
         }
+
+        this.field.widget = this
+
+        // Copy this prop as we may need to alter/overide it
+        this.displayReadonly = this.readonly
+
+        if(this.field.options.hasOwnProperty('readonly')) {
+            this.displayReadonly = this.field.options.readonly
+        }
     },
-    data: DataProxy,
-    methods: Object.assign({}, WidgetProxy, {
+    methods: Object.assign({}, MethodProxy, {
         getFieldClass() {
             return 'mutt-field mutt-field-radio'
         },
@@ -79,5 +79,5 @@ export default {
             }
         }
     })
-}
+})
 </script>

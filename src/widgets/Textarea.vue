@@ -4,10 +4,10 @@
             v-bind:field="field"
             v-bind:fieldId="getFieldId()"></label-widget>
         <readonly-widget
-            v-if="field.options.readonly"
+            v-if="displayReadonly"
             v-bind:value="value"></readonly-widget>
         <textarea
-            v-if="!field.options.readonly"
+            v-if="!displayReadonly"
             ref="textarea"
             :class="getFieldClass()"
             v-bind:name="field.name"
@@ -15,6 +15,7 @@
             v-model="value"></textarea>
         <help-widget v-bind:field="field"></help-widget>
         <error-widget
+            v-if="!displayReadonly"
             v-bind:field="field"
             v-bind:errors="errors"
             v-bind:errorClass="getErrorClass()"></error-widget>
@@ -22,28 +23,18 @@
 </template>
 
 <script>
-import LabelWidget from './helpers/Label.vue'
-import ErrorWidget from './helpers/Error.vue'
-import HelpWidget from './helpers/Help.vue'
-import ReadonlyWidget from './helpers/Readonly.vue'
-import { WidgetProxy, DataProxy } from '../utils'
+import { MuttWidgetProxy, MethodProxy } from '../utils'
 
-export default {
+export default Object.assign({}, MuttWidgetProxy, {
     name: 'mutt-textarea',
-    props: [ 'field' ],
-    components: {
-        LabelWidget,
-        ErrorWidget,
-        HelpWidget,
-        ReadonlyWidget
-    },
-    created() {
-        this.field.widget = this
-    },
-    data: DataProxy,
-    methods: Object.assign({}, WidgetProxy, {
+    methods: Object.assign({}, MethodProxy, {
         getFieldClass() {
-            return 'mutt-field mutt-field-textrea'
+            return 'mutt-field mutt-field-text'
+        },
+        focus() {
+            this.$nextTick(() => {
+                this.$refs.text.focus()
+            })
         },
         callback() {
             if(this.field.validate()) {
@@ -52,12 +43,7 @@ export default {
                     validated: true
                 })
             }
-        },
-        focus() {
-            this.$nextTick(() => {
-                this.$refs.textarea.focus()
-            })
         }
     })
-}
+})
 </script>
