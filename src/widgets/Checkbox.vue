@@ -6,19 +6,20 @@
             v-bind:class="getLabelClass"
             v-bind:fieldId="getFieldId()"></label-widget>
         <readonly-widget
-            v-if="displayReadonly"
+            v-if="isReadOnly"
             v-bind:value="field.value"></readonly-widget>
         <input
-            v-if="!displayReadonly"
+            v-if="!isReadOnly"
             type="checkbox"
             v-bind:class="getFieldClass()"
             v-bind:name="field.name"
             v-bind:id="field.name"
             v-bind:value="value"
             v-model="value">
-        <help-widget :field="field"></help-widget>
+        <help-widget
+            v-bind:field="field"></help-widget>
         <error-widget
-            v-if="!displayReadonly"
+            v-if="!isReadOnly"
             v-bind:field="field"
             v-bind:errors="errors"
             v-bind:errorClass="getErrorClass()"></error-widget>
@@ -26,19 +27,19 @@
 </template>
 
 <script>
-import { MuttWidgetProxy, MethodProxy } from '../utils'
+import { MuttWidgetProxy, ComputedProxy, MethodProxy } from '../utils'
 
 export default Object.assign({}, MuttWidgetProxy, {
     name: 'mutt-checkbox',
     for: 'boolean',
-    computed: {
+    computed: Object.assign({}, ComputedProxy, {
         getLabelClass() {
             return {
                 'mutt-label': true,
                 'mutt-field-checkbox-checked': this.value
             }
         }
-    },
+    }),
     methods: Object.assign({}, MethodProxy, {
         getFieldClass() {
             return 'mutt-field mutt-field-checkbox'

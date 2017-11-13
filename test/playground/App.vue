@@ -7,6 +7,7 @@
             v-bind:data="data"
             v-bind:readonly="readonly"
             ></mutt-vue>
+        <button v-on:click.prevent="makeReadonly()">Readonly</button>
     </div>
 </template>
 
@@ -14,11 +15,17 @@
 
 // TEST LAYOUT
 import MuttVue from '../../src/Form.vue'
+// import MuttVue from './MuttVueTest.vue'
 
 export default {
     name: 'app',
     components: {
         MuttVue
+    },
+    methods: {
+        makeReadonly() {
+            this.readonly = !this.readonly
+        }
     },
     data() {
         return {
@@ -50,6 +57,9 @@ export default {
                         'SECOND'
                     ]
                 },
+                radioBooleanField: {
+                    type: 'boolean'
+                },
                 arrayField: {
                     type: 'array',
                     minItems: 2,
@@ -65,6 +75,21 @@ export default {
                         },
                         lastName: {
                             type: 'string'
+                        }
+                    }
+                },
+                arrayObjField: {
+                    type: 'array',
+                    minItems: 2,
+                    items: {
+                        type: 'object',
+                        properties: {
+                            firstName: {
+                                type: 'string'
+                            },
+                            lastName: {
+                                type: 'string'
+                            }
                         }
                     }
                 },
@@ -95,6 +120,14 @@ export default {
                         label: 'Radio Field',
                         widget: 'radio'
                     },
+                    radioBooleanField: {
+                        label: 'Radio Boolean Field',
+                        widget: 'radio',
+                        choices : [
+                            [ true, "A - True" ],
+                            [ false, "B - False" ]
+                        ]
+                    },
                     arrayField: {
                         label: 'Array Field'
                     },
@@ -113,8 +146,34 @@ export default {
                 }
             },
             data: {
-                textField: 'Testing!!',
-                textareaField: 'Testing some more!'
+                textField: 'Testing 123',
+                textareaField: 'Testing some more!',
+                objectField: {
+                    firstName: 'Test first name!',
+                    lastName: 'Test last name'
+                },
+                arrayField: [
+                    'First',
+                    'Second'
+                ],
+                arrayObjField: [
+                    {
+                        firstName: 'FIRST NAME',
+                        lastName: 'LAST NAME'
+                    },
+                    {
+                        firstName: 'SECOND FIRST NAME',
+                        lastName: 'THIRD LAST NAME'
+                    },
+                    {
+                        firstName: 'FORTH FIRST NAME',
+                        lastName: 'FORTH LAST NAME'
+                    },
+                    {
+                        firstName: 'ANOTHER FIRST NAME',
+                        lastName: 'ANOTHER LAST NAME'
+                    }
+                ]
             }
         }
     }

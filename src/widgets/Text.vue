@@ -4,10 +4,10 @@
             v-bind:field="field"
             v-bind:fieldId="getFieldId()"></label-widget>
         <readonly-widget
-            v-if="displayReadonly"
+            v-if="isReadOnly"
             v-bind:value="field.value"></readonly-widget>
         <input
-            v-if="!displayReadonly"
+            v-if="!isReadOnly"
             ref="text"
             type="text"
             :class="getFieldClass()"
@@ -16,9 +16,10 @@
             v-bind:value="value"
             v-on:keypress.enter.prevent="callback"
             v-model="value">
-        <help-widget v-bind:field="field"></help-widget>
+        <help-widget
+            v-bind:field="field"></help-widget>
         <error-widget
-            v-if="!displayReadonly"
+            v-if="!isReadOnly"
             v-bind:field="field"
             v-bind:errors="errors"
             v-bind:errorClass="getErrorClass()"></error-widget>

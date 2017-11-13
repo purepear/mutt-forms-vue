@@ -25,9 +25,23 @@ export const PropsProxy = {
 
 export const DataProxy = function() {
     return {
-        displayReadonly: false,
         errors: null,
-        value: ''
+        value: null
+    }
+}
+
+export const ComputedProxy = {
+    isReadOnly() {
+        /*
+            Note: This is a computed property to make it reactive
+            to changes to this.readonly. However, in the case that
+            there is an overide, this will always be applied.
+        */
+        if(this.field.options.hasOwnProperty('readonly')) {
+            return this.field.options.readonly
+        }
+
+        return this.readonly
     }
 }
 
@@ -62,6 +76,7 @@ export const MethodProxy = {
 export const MuttWidgetProxy = {
     props: PropsProxy,
     data: DataProxy,
+    computed: ComputedProxy,
     methods: MethodProxy,
     components: {
         LabelWidget,
@@ -70,13 +85,8 @@ export const MuttWidgetProxy = {
         ReadonlyWidget
     },
     created() {
+        // TODO: Remove once mutt field/widget link fixed
+        this.value = this.field.value
         this.field.widget = this
-
-        // Copy this prop as we may need to alter/overide it
-        this.displayReadonly = this.readonly
-
-        if(this.field.options.hasOwnProperty('readonly')) {
-            this.displayReadonly = this.field.options.readonly
-        }
     }
 }

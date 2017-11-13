@@ -4,11 +4,12 @@
             v-bind:field="field"
             v-bind:fieldId="getFieldId()"></label-widget>
         <readonly-widget
-            v-if="displayReadonly"
+            v-if="isReadOnly"
             v-bind:value="field.value"></readonly-widget>
+
         <div class="mutt-field-choice-wrap select">
             <select
-                v-if="!displayReadonly"
+                v-if="!isReadOnly"
                 type="text"
                 :class="getFieldClass()"
                 v-bind:name="field.name"
@@ -19,9 +20,11 @@
                     :value="option[0]">{{ option[1] }}</option>
             </select>
         </div>
-        <help-widget v-bind:field="field"></help-widget>
+
+        <help-widget
+            v-bind:field="field"></help-widget>
         <error-widget
-            v-if="!displayReadonly"
+            v-if="!isReadOnly"
             v-bind:field="field"
             v-bind:errors="errors"
             v-bind:errorClass="getErrorClass()"></error-widget>

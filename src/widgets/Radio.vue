@@ -6,8 +6,9 @@
         <label-widget
             v-bind:field="field"
             v-bind:fieldId="getFieldId()"></label-widget>
+
         <div
-            v-if="!displayReadonly"
+            v-if="!isReadOnly"
             v-for="(choice, index) of field.choices"
             class="mutt-field-radio-item">
             <input
@@ -22,12 +23,14 @@
                 v-bind:for="`${field.id}-${choice[0]}`"
                 class="mutt-label">{{ choice[1] }}</label>
         </div>
+
         <readonly-widget
-            v-if="displayReadonly"
+            v-if="isReadOnly"
             v-bind:value="field.value"></readonly-widget>
-        <help-widget v-bind:field="field"></help-widget>
+        <help-widget
+            v-bind:field="field"></help-widget>
         <error-widget
-            v-if="!displayReadonly"
+            v-if="!isReadOnly"
             v-bind:field="field"
             v-bind:errors="errors"
             v-bind:errorClass="getErrorClass()"></error-widget>
@@ -46,15 +49,20 @@ export default Object.assign({}, MuttWidgetProxy, {
             if(this.field.options.hasOwnProperty('choices')) {
                 this.field.choices = this.field.options.choices
             } else {
-                this.field.choices = [[true, 'Yes'], [false, 'No']]
+                this.field.choices = [
+                    [ true, 'Yes' ],
+                    [ false, 'No' ]
+                ]
             }
         }
 
         // Set the default value
+        // FIXME: not a vue thing
         if(this.field.options.hasOwnProperty('default')) {
-            this.value = this.field.options.default
+            this.field.value = this.field.options.default
         }
 
+        this.value = this.field.value
         this.field.widget = this
 
         // Copy this prop as we may need to alter/overide it
@@ -69,6 +77,8 @@ export default Object.assign({}, MuttWidgetProxy, {
             return 'mutt-field mutt-field-radio'
         },
         callback(choice, label) {
+            this.value = choice
+
             if(this.field.validate()) {
                 this.$emit('callback', {
                     action: 'radioSelect',

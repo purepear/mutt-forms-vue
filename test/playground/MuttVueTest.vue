@@ -17,7 +17,7 @@
 
 export default {
     name: 'mutt-vue',
-    props: [ 'schema', 'options' ],
+    props: [ 'schema', 'options', 'data' ],
     created() {
         this.form = new this.$mutt(
             this.schema,
@@ -25,7 +25,9 @@ export default {
         )
     },
     mounted() {
-        debugger
+        if(this.data) {
+            this.form.populate(this.data)
+        }
     },
     data() {
         return {
