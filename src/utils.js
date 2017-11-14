@@ -70,6 +70,22 @@ export const MethodProxy = {
         if(errors.length > 0) {
             this.errors = errors
         }
+    },
+
+    submitCallback() {
+        if(this.field.validate()) {
+            this.$emit('callback', {
+                key: this.field.name,
+                action: 'submit',
+                validated: true
+            })
+        } else {
+            this.$emit('callback', {
+                key: this.field.name,
+                action: 'submit',
+                validated: false
+            })
+        }
     }
 }
 

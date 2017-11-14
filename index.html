@@ -2,10 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>mutt-vue</title>
+    <title>Mutt Forms Vue</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css" rel="stylesheet">
+    <style>
+    body {
+        padding-bottom: 10%;
+    }
+    fieldset {
+        border: 1px solid #ccc;
+        padding: 2% 5%;
+    }
+    legend, label {
+        font-weight: bold;
+    }
+    </style>
   </head>
   <body>
-    <div id="app"></div>
+    <div class="container">
+        <div id="app"></div>
+    </div>
     <script src="/dist/build.js"></script>
   </body>
 </html>

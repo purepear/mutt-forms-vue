@@ -6,11 +6,22 @@
 
 ``` bash
 # install dependencies
-npm install
+yarn install
 
 # serve with hot reload at localhost:8080
-npm run dev
+yarn run dev
 
 # build for production with minification
-npm run build
+yarn run build
 ```
+
+## Using Mutt Forms Vue
+
+
+### Widget Events
+
+-   `submit`
+    Each time a item is 'submitted' a submit event is fired. This will
+    include a payload with the validation status.
+
+-

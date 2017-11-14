@@ -15,6 +15,7 @@
             v-bind:name="field.name"
             v-bind:id="field.name"
             v-bind:value="value"
+            v-on:change="submitCallback"
             v-model="value">
         <help-widget
             v-bind:field="field"></help-widget>
@@ -42,7 +43,7 @@ export default Object.assign({}, MuttWidgetProxy, {
     }),
     methods: Object.assign({}, MethodProxy, {
         getFieldClass() {
-            return 'mutt-field mutt-field-checkbox'
+            return 'mutt-field mutt-field-checkbox checkbox'
         }
     })
 })

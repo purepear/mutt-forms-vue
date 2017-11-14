@@ -18,7 +18,7 @@
                 v-bind:id="`${field.id}-${choice[0]}`"
                 v-bind:value="choice[0]"
                 v-bind:class="getFieldClass()"
-                v-on:change="callback(choice[0], choice[1])">
+                v-on:change="select(choice[0], choice[1])">
             <label
                 v-bind:for="`${field.id}-${choice[0]}`"
                 class="mutt-label">{{ choice[1] }}</label>
@@ -74,17 +74,28 @@ export default Object.assign({}, MuttWidgetProxy, {
     },
     methods: Object.assign({}, MethodProxy, {
         getFieldClass() {
-            return 'mutt-field mutt-field-radio'
+            return 'mutt-field mutt-field-radio radio'
         },
-        callback(choice, label) {
+
+        select(choice, label) {
             this.value = choice
 
             if(this.field.validate()) {
                 this.$emit('callback', {
+                    key: this.field.name,
                     action: 'radioSelect',
                     choice: choice,
                     label: label,
                     validated: true
+                })
+            } else {
+                // Here for completeness but shouldn't really occur?
+                this.$emit('callback', {
+                    key: this.field.name,
+                    action: 'radioSelect',
+                    choice: choice,
+                    label: label,
+                    validated: false
                 })
             }
         }

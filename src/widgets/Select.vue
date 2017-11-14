@@ -13,6 +13,7 @@
                 type="text"
                 :class="getFieldClass()"
                 v-bind:name="field.name"
+                v-on:change="submitCallback"
                 v-model="value">
                 <option value="">{{ getDefaultSelect() }}</option>
                 <option
@@ -45,6 +46,22 @@ export default Object.assign({}, MuttWidgetProxy, {
         },
         getFieldClass() {
             return 'mutt-field mutt-field-choice'
+        },
+        select() {
+            if(this.field.validate()) {
+                this.$emit('callback', {
+                    key: this.field.name,
+                    action: 'select',
+                    validated: true
+                })
+            } else {
+                // Here for completeness but shouldn't really occur?
+                this.$emit('callback', {
+                    key: this.field.name,
+                    action: 'select',
+                    validated: false
+                })
+            }
         }
     }),
     watch: {

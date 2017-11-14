@@ -6,7 +6,8 @@
                 v-for="objectField of field.object"
                 v-bind:key="objectField.id"
                 v-bind:field="objectField"
-                v-bind:readonly="readonly"></mutt-widget>
+                v-bind:readonly="readonly"
+                v-on:callback="bubble"></mutt-widget>
         </fieldset>
     </div>
 </template>
@@ -19,6 +20,9 @@ export default Object.assign({}, MuttWidgetProxy, {
     methods: Object.assign({}, MethodProxy, {
         getFieldClass() {
             return 'mutt-field mutt-field-object'
+        },
+        bubble(payload) {
+            this.$emit('callback', payload)
         }
     })
 })

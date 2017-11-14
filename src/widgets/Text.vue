@@ -14,7 +14,7 @@
             :placeholder="field.options.placeholder"
             v-bind:name="field.name"
             v-bind:value="value"
-            v-on:keypress.enter.prevent="callback"
+            v-on:keypress.enter.prevent="submitCallback"
             v-model="value">
         <help-widget
             v-bind:field="field"></help-widget>
@@ -33,20 +33,12 @@ export default Object.assign({}, MuttWidgetProxy, {
     name: 'mutt-text',
     methods: Object.assign({}, MethodProxy, {
         getFieldClass() {
-            return 'mutt-field mutt-field-text'
+            return 'mutt-field mutt-field-text input'
         },
         focus() {
             this.$nextTick(() => {
                 this.$refs.text.focus()
             })
-        },
-        callback() {
-            if(this.field.validate()) {
-                this.$emit('callback', {
-                    action: 'toggleOverlay',
-                    validated: true
-                })
-            }
         }
     })
 })

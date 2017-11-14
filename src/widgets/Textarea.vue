@@ -11,7 +11,7 @@
             ref="textarea"
             :class="getFieldClass()"
             v-bind:name="field.name"
-            v-on:keypress.enter.prevent="callback"
+            v-on:keypress.enter.prevent="submitCallback"
             v-model="value"></textarea>
         <help-widget
             v-bind:field="field"></help-widget>
@@ -30,20 +30,12 @@ export default Object.assign({}, MuttWidgetProxy, {
     name: 'mutt-textarea',
     methods: Object.assign({}, MethodProxy, {
         getFieldClass() {
-            return 'mutt-field mutt-field-text'
+            return 'mutt-field mutt-field-text textarea'
         },
         focus() {
             this.$nextTick(() => {
-                this.$refs.text.focus()
+                this.$refs.textarea.focus()
             })
-        },
-        callback() {
-            if(this.field.validate()) {
-                this.$emit('callback', {
-                    action: 'toggleOverlay',
-                    validated: true
-                })
-            }
         }
     })
 })

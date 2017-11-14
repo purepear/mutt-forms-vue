@@ -6,7 +6,8 @@
                 v-for="field of fieldset.fields"
                 v-bind:key="field.id"
                 v-bind:field="field"
-                v-bind:readonly="readonly"></mutt-widget>
+                v-bind:readonly="readonly"
+                v-on:callback="callback"></mutt-widget>
             <button v-on:click="submit">Submit</button>
         </fieldset>
     </form>
@@ -48,6 +49,9 @@ export default {
         }
     },
     methods: {
+        callback(payload) {
+            this.$emit('callback', payload)
+        },
         submit() {
             this.$emit('submit', this.form)
         }
