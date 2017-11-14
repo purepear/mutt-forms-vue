@@ -1,29 +1,43 @@
 <template>
     <div id="app">
-        <h1>Mutt Forms - Vue</h1>
+        <h1 class="title">Mutt Forms Vue</h1>
         <mutt-vue
             v-bind:schema="schema"
             v-bind:options="options"
             v-bind:data="data"
+            v-bind:readonly="readonly"
+            v-on:callback="callbackPrinter"
             ></mutt-vue>
+        <button v-on:click.prevent="makeReadonly()">Readonly</button>
     </div>
 </template>
 
 <script>
 
 // TEST LAYOUT
-//import MuttVue from '../../src/Form.vue'
-import MuttVue from './MuttVueTest.vue'
+import MuttVue from '../../src/Form.vue'
 
 export default {
     name: 'app',
     components: {
         MuttVue
     },
+    methods: {
+        makeReadonly() {
+            this.readonly = !this.readonly
+        },
+        callbackPrinter(payload) {
+            console.log('Widget Callback: ', JSON.stringify(payload, null, 2))
+        }
+    },
     data() {
         return {
+            readonly: false,
             schema: {
                 textField: {
+                    type: 'string'
+                },
+                textField1: {
                     type: 'string'
                 },
                 textareaField: {
@@ -91,6 +105,9 @@ export default {
                     textField: {
                         label: 'Text Field',
                         required: true
+                    },
+                    textField1: {
+                        label: 'Text Field 1'
                     },
                     textareaField: {
                         label: 'Textarea Field',

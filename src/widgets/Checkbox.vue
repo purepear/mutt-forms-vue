@@ -2,18 +2,25 @@
     <div v-if="field" class="mutt-field-wrapper--checkbox" :class="getFieldWrapperClass()">
         <label-widget
             v-bind:for="field.name"
-            v-bind:field="field"            
+            v-bind:field="field"
             v-bind:class="getLabelClass"
             v-bind:fieldId="getFieldId()"></label-widget>
+        <readonly-widget
+            v-if="isReadOnly"
+            v-bind:value="field.value"></readonly-widget>
         <input
+            v-if="!isReadOnly"
             type="checkbox"
             v-bind:class="getFieldClass()"
             v-bind:name="field.name"
             v-bind:id="field.name"
             v-bind:value="value"
+            v-on:change="submitCallback"
             v-model="value">
-        <help-widget :field="field"></help-widget>
+        <help-widget
+            v-bind:field="field"></help-widget>
         <error-widget
+            v-if="!isReadOnly"
             v-bind:field="field"
             v-bind:errors="errors"
             v-bind:errorClass="getErrorClass()"></error-widget>
@@ -21,37 +28,23 @@
 </template>
 
 <script>
-import LabelWidget from './helpers/Label.vue'
-import ErrorWidget from './helpers/Error.vue'
-import HelpWidget from './helpers/Help.vue'
-import { WidgetProxy, DataProxy } from '../utils'
+import { MuttWidgetProxy, ComputedProxy, MethodProxy } from '../utils'
 
-export default {
+export default Object.assign({}, MuttWidgetProxy, {
     name: 'mutt-checkbox',
     for: 'boolean',
-    props: [ 'field' ],
-    components: {
-        LabelWidget,
-        ErrorWidget,
-        HelpWidget
-    },
-    created() {
-        this.value = this.field.value
-        this.field.widget = this
-    },
-    data: DataProxy,
-    computed: {
+    computed: Object.assign({}, ComputedProxy, {
         getLabelClass() {
             return {
                 'mutt-label': true,
                 'mutt-field-checkbox-checked': this.value
             }
         }
-    },
-    methods: Object.assign({}, WidgetProxy, {
+    }),
+    methods: Object.assign({}, MethodProxy, {
         getFieldClass() {
-            return 'mutt-field mutt-field-checkbox'
+            return 'mutt-field mutt-field-checkbox checkbox'
         }
     })
-}
+})
 </script>

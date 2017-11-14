@@ -1,23 +1,36 @@
 <template>
-    <div v-if="field" class="mutt-field-wrapper--checkbox mutt-field-wrapper--radio" :class="getFieldWrapperClass()">
+    <div
+        v-if="field"
+        class="mutt-field-wrapper--checkbox mutt-field-wrapper--radio"
+        :class="getFieldWrapperClass()">
         <label-widget
             v-bind:field="field"
             v-bind:fieldId="getFieldId()"></label-widget>
-        <div v-for="choice of field.choices" class="mutt-field-radio-item">
+
+        <div
+            v-if="!isReadOnly"
+            v-for="(choice, index) of field.choices"
+            class="mutt-field-radio-item">
             <input
                 type="radio"
                 v-model="value"
-                v-bind:name="`${field.id}-${choice[0]}`"
+                v-bind:name="field.id"
                 v-bind:id="`${field.id}-${choice[0]}`"
                 v-bind:value="choice[0]"
                 v-bind:class="getFieldClass()"
-                v-on:click="callback(choice[0], choice[1])">
+                v-on:change="select(choice[0], choice[1])">
             <label
                 v-bind:for="`${field.id}-${choice[0]}`"
                 class="mutt-label">{{ choice[1] }}</label>
         </div>
-        <help-widget v-bind:field="field"></help-widget>
+
+        <readonly-widget
+            v-if="isReadOnly"
+            v-bind:value="field.value"></readonly-widget>
+        <help-widget
+            v-bind:field="field"></help-widget>
         <error-widget
+            v-if="!isReadOnly"
             v-bind:field="field"
             v-bind:errors="errors"
             v-bind:errorClass="getErrorClass()"></error-widget>
@@ -25,19 +38,10 @@
 </template>
 
 <script>
-import LabelWidget from './helpers/Label.vue'
-import ErrorWidget from './helpers/Error.vue'
-import HelpWidget from './helpers/Help.vue'
-import { WidgetProxy, DataProxy } from '../utils'
+import { MuttWidgetProxy, MethodProxy } from '../utils'
 
-export default {
+export default Object.assign({}, MuttWidgetProxy, {
     name: 'mutt-radio',
-    props: [ 'field' ],
-    components: {
-        LabelWidget,
-        ErrorWidget,
-        HelpWidget
-    },
     created() {
         // Booleans do not have choices, so we must contrive
         // them if they aren't already set
@@ -52,26 +56,49 @@ export default {
             }
         }
 
+        // Set the default value
+        // FIXME: not a vue thing
+        if(this.field.options.hasOwnProperty('default')) {
+            this.field.value = this.field.options.default
+        }
+
         this.value = this.field.value
         this.field.widget = this
+
+        // Copy this prop as we may need to alter/overide it
+        this.displayReadonly = this.readonly
+
+        if(this.field.options.hasOwnProperty('readonly')) {
+            this.displayReadonly = this.field.options.readonly
+        }
     },
-    data: DataProxy,
-    methods: Object.assign({}, WidgetProxy, {
+    methods: Object.assign({}, MethodProxy, {
         getFieldClass() {
-            return 'mutt-field mutt-field-radio'
+            return 'mutt-field mutt-field-radio radio'
         },
-        callback(choice, label) {
+
+        select(choice, label) {
             this.value = choice
 
             if(this.field.validate()) {
                 this.$emit('callback', {
+                    key: this.field.name,
+                    value: this.field.value,
                     action: 'radioSelect',
-                    choice: choice,
                     label: label,
                     validated: true
+                })
+            } else {
+                // Here for completeness but shouldn't really occur?
+                this.$emit('callback', {
+                    key: this.field.name,
+                    value: this.field.value,
+                    action: 'radioSelect',
+                    label: label,
+                    validated: false
                 })
             }
         }
     })
-}
+})
 </script>

@@ -10,20 +10,14 @@
 </template>
 
 <script>
-import { WidgetProxy, DataProxy } from '../utils'
+import { MuttWidgetProxy, MethodProxy } from '../utils'
 
-export default {
+export default Object.assign({}, MuttWidgetProxy, {
     name: 'mutt-hidden',
-    props: [ 'field' ],
-    created() {
-        this.value = this.field.value
-        this.field.widget = this
-    },
-    data: DataProxy,
-    methods: Object.assign({}, WidgetProxy, {
-        getFieldClass: function() {
+    methods: Object.assign({}, MethodProxy, {
+        getFieldClass() {
             return 'mutt-field mutt-field-hidden'
         }
     })
-}
+})
 </script>

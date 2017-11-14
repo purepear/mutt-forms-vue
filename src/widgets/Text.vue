@@ -3,17 +3,23 @@
         <label-widget
             v-bind:field="field"
             v-bind:fieldId="getFieldId()"></label-widget>
+        <readonly-widget
+            v-if="isReadOnly"
+            v-bind:value="field.value"></readonly-widget>
         <input
+            v-if="!isReadOnly"
             ref="text"
             type="text"
             :class="getFieldClass()"
             :placeholder="field.options.placeholder"
             v-bind:name="field.name"
             v-bind:value="value"
-            v-on:keypress.enter.prevent="callback"
+            v-on:keypress.enter.prevent="submitCallback"
             v-model="value">
-        <help-widget v-bind:field="field"></help-widget>
+        <help-widget
+            v-bind:field="field"></help-widget>
         <error-widget
+            v-if="!isReadOnly"
             v-bind:field="field"
             v-bind:errors="errors"
             v-bind:errorClass="getErrorClass()"></error-widget>
@@ -21,41 +27,19 @@
 </template>
 
 <script>
-import LabelWidget from './helpers/Label.vue'
-import ErrorWidget from './helpers/Error.vue'
-import HelpWidget from './helpers/Help.vue'
-import { WidgetProxy, DataProxy } from '../utils'
+import { MuttWidgetProxy, MethodProxy } from '../utils'
 
-export default {
+export default Object.assign({}, MuttWidgetProxy, {
     name: 'mutt-text',
-    props: [ 'field' ],
-    components: {
-        LabelWidget,
-        ErrorWidget,
-        HelpWidget
-    },
-    created() {
-        this.value = this.field.value
-        this.field.widget = this
-    },
-    data: DataProxy,
-    methods: Object.assign({}, WidgetProxy, {
+    methods: Object.assign({}, MethodProxy, {
         getFieldClass() {
-            return 'mutt-field mutt-field-text'
+            return 'mutt-field mutt-field-text input'
         },
         focus() {
             this.$nextTick(() => {
                 this.$refs.text.focus()
             })
-        },
-        callback() {
-            if(this.field.validate()) {
-                this.$emit('callback', {
-                    action: 'toggleOverlay',
-                    validated: true
-                })
-            }
         }
     })
-}
+})
 </script>

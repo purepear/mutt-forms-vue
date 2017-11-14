@@ -5,7 +5,9 @@
             <mutt-widget
                 v-for="field of fieldset.fields"
                 v-bind:key="field.id"
-                v-bind:field="field"></mutt-widget>
+                v-bind:field="field"
+                v-bind:readonly="readonly"
+                v-on:callback="callback"></mutt-widget>
             <button v-on:click="submit">Submit</button>
         </fieldset>
     </form>
@@ -14,7 +16,22 @@
 <script>
 export default {
     name: 'mutt-vue',
-    props: [ 'schema', 'options', 'data' ],
+    props: {
+        schema: {
+            type: Object,
+            required: true
+        },
+        options: {
+            type: Object
+        },
+        data: {
+            type: Object
+        },
+        readonly: {
+            type: Boolean,
+            default: false
+        }
+    },
     created() {
         this.form = new this.$mutt(
             this.schema,
@@ -32,6 +49,9 @@ export default {
         }
     },
     methods: {
+        callback(payload) {
+            this.$emit('callback', payload)
+        },
         submit() {
             this.$emit('submit', this.form)
         }
