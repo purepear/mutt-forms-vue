@@ -76,12 +76,14 @@ export const MethodProxy = {
         if(this.field.validate()) {
             this.$emit('callback', {
                 key: this.field.name,
+                value: this.field.value,
                 action: 'submit',
                 validated: true
             })
         } else {
             this.$emit('callback', {
                 key: this.field.name,
+                value: this.field.value,
                 action: 'submit',
                 validated: false
             })

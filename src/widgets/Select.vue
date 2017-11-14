@@ -51,6 +51,7 @@ export default Object.assign({}, MuttWidgetProxy, {
             if(this.field.validate()) {
                 this.$emit('callback', {
                     key: this.field.name,
+                    value: this.field.value,
                     action: 'select',
                     validated: true
                 })
@@ -58,6 +59,7 @@ export default Object.assign({}, MuttWidgetProxy, {
                 // Here for completeness but shouldn't really occur?
                 this.$emit('callback', {
                     key: this.field.name,
+                    value: this.field.value,
                     action: 'select',
                     validated: false
                 })
