@@ -7,6 +7,7 @@
             v-bind:data="data"
             v-bind:readonly="readonly"
             v-on:callback="callbackPrinter"
+            v-on:submit="submit"
             ></mutt-vue>
         <button v-on:click.prevent="makeReadonly()">Readonly</button>
     </div>
@@ -28,6 +29,9 @@ export default {
         },
         callbackPrinter(payload) {
             console.log('Widget Callback: ', JSON.stringify(payload, null, 2))
+        },
+        submit() {
+            console.log('SUBMITTED')
         }
     },
     data() {
