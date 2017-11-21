@@ -7,18 +7,24 @@
             v-if="isReadOnly"
             v-bind:value="field.value"></readonly-widget>
 
-        <div class="mutt-field-choice-wrap select">
+        <div class="mutt-field-choice-wrap">
             <select
                 v-if="!isReadOnly"
-                type="text"
                 :class="getFieldClass()"
                 v-bind:name="field.name"
                 v-on:change="submitCallback"
-                v-model="value">
-                <option value="">{{ getDefaultSelect() }}</option>
+                v-model="field.value">
+                <option
+                    :selected="field.value === null"
+                    :value="null"
+                    hidden default>
+                    {{ getDefaultSelect() }}
+                </option>
                 <option
                     v-for="(option, index) in field.choices"
-                    :value="option[0]">{{ option[1] }}</option>
+                    :value="option[0]">
+                    {{ option[1] }}
+                </option>
             </select>
         </div>
 

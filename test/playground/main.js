@@ -5,6 +5,6 @@ import MuttVue from '../../src/main'
 Vue.use(MuttVue, {})
 
 new Vue({ //eslint-disable-line
-    el: '#app',
-    render: h => h(App)
+  el: '#app',
+  render: h => h(App)
 })

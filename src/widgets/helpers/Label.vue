@@ -5,14 +5,7 @@
 </template>
 
 <script>
-function capitalize(lower) {
-    return lower.toLowerCase().replace(
-        /(?:^|\s)\S/g,
-        (letter) => {
-            return letter.toUpperCase()
-        }
-    )
-}
+import { capitalize } from '../../utils'
 
 export default {
     name: 'label-widget',

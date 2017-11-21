@@ -1,38 +1,38 @@
-# mutt-forms-vue
+<img src="https://raw.githubusercontent.com/boughtbymany/mutt-forms-vue/master/docs/mutt-vue.svg" alt="Mutt" width="275">
+
+# Mutt Forms Vue
 
 > A VueJS plugin for Mutt Forms.
 
-## Build Setup
+![Build Status](https://travis-ci.org/boughtbymany/mutt-forms-vue.svg?branch=master)
 
-``` bash
-# install dependencies
-yarn install
+Mutt Forms Vue integrates [Mutt Forms](https://github.com/boughtbymany/mutt-forms) with
+[VueJS](https://vuejs.org/) to allow for forms to be rendered using Vue.
 
-# serve with hot reload at localhost:8080
-yarn run dev
+Full documentation is available [here](https://nicksnell.gitbooks.io/mutt-forms-vue/).
 
-# build for production with minification
-yarn run build
+### Installation
+
+The easiest way to get started with Mutt Forms Vue is to install via Yarn:
+
+`yarn add mutt-forms-vue`
+
+### Integrating with Vue
+
+Mutt Forms Vue is a standard Vue plugin, in the simplest case it can be installed
+like so:
+
+``` javascript
+import Vue from 'vue'
+import MuttVue from 'mutt-forms-vue'
+
+Vue.use(MuttVue)
 ```
 
-## Using Mutt Forms Vue
-
-[todo]
-
-### Widget Events
-
-Widgets will fire events on certain interactions. These events are all wrapped
-up under the same event name "callback", which allows for one handler to be
-bound to all the widgets. The "callback" event includes an action, describing
-the type of interaction.
-
-The payload also includes the name of the field and the current value.
-
-Actions:
-
-- `submit` Each time a item is 'submitted' a submit event is fired. This will
-    include a payload with the validation status.
-
-- `select` Select elements will fire this event on a change of value
-
-- `radioSelect` Radio elements will fire this event on a change of value
+##### Read more
+* [Overview](docs/overview.md)
+* [Usage](docs/usage.md)
+* [Widgets](docs/widgets.md)
+* [Events](docs/events.md)
+* [Advanced Concepts](docs/advanced.md)
+* [Github](https://github.com/boughtbymany/mutt-forms-vue)
