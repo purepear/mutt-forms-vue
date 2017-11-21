@@ -37,6 +37,7 @@ export default {
             this.schema,
             this.options
         )
+        this.$emit('init', this.form)
     },
     mounted() {
         if(this.data) {

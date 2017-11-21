@@ -7,6 +7,7 @@ import Mutt, { widgets } from 'mutt-forms'
 
 // Widgets
 import MuttVue from './Form.vue'
+import MuttWatcher from './Watcher.vue'
 import MuttText from './widgets/Text.vue'
 import MuttTextarea from './widgets/Textarea.vue'
 import MuttCheckbox from './widgets/Checkbox.vue'
@@ -145,21 +146,26 @@ export default {
                     return resolveWidget(Mutt.config.getWidget(this.field.type))
                 },
 
-                /*
-                * In order to pass events back to the parent component, we
-                * provide a single generic options variable so you can get
-                * everything with $event template var.
-                */
+                /**
+                 * In order to pass events back to the parent component, we
+                 * provide a single generic options variable so you can get
+                 * everything with $event template var.
+                 */
                 callback(options) {
                     this.$emit('callback', options)
                 }
             }
         })
 
-        /*
-        * Register root vue on global scope to be usable anywhere
-        * outside of mutt-widget
-        */
+        /**
+         * Special Mutt Watcher Component
+         */
+        Vue.component('mutt-watcher', MuttWatcher)
+
+        /**
+         * Register root vue on global scope to be usable anywhere
+         * outside of mutt-widget
+         */
         Vue.component('mutt-vue', MuttVue)
 
         Vue.prototype.$mutt = Mutt

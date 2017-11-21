@@ -1,7 +1,7 @@
 {
   "name": "mutt-forms-vue",
   "description": "Mutt forms - VueJS integration",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "author": "Bought By Many <dev@boughtbymany.com>",
   "license": "MIT",
   "main": "src/main.js",
@@ -19,11 +19,10 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "lint": "eslint --ext .js,.vue src test/specs",
-    "linter": "npm run lint; exit 0"
+    "linter": "yarn run lint; exit 0",
+    "test": "yarn run jest"
   },
   "dependencies": {
-    "babel-core": "^6.26.0",
-    "moment": "2.18.1",
     "mutt-forms": "^1.5.x",
     "vue": "^2.5.2"
   },
@@ -47,11 +46,7 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "file-loader": "^0.9.0",
-    "jsdom": "^11.0.0",
-    "jsdom-global": "^3.0.2",
-    "mocha": "^3.4.2",
-    "mocha-jsdom": "^1.1.0",
-    "mocha-webpack": "^0.7.0",
+    "jest": "^21.2.1",
     "vue-loader": "^12.2.1",
     "vue-template-compiler": "^2.5.x",
     "webpack": "^2.6.1",

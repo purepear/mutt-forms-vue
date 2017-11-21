@@ -1,15 +1,28 @@
 <template>
     <div id="app">
-        <h1 class="title">Mutt Forms Vue</h1>
+        <h1 class="title is-1">Mutt Forms Vue</h1>
         <mutt-vue
             v-bind:schema="schema"
             v-bind:options="options"
             v-bind:data="data"
             v-bind:readonly="readonly"
+            v-on:init="setForm"
             v-on:callback="callbackPrinter"
             v-on:submit="submit"
             ></mutt-vue>
         <button v-on:click.prevent="makeReadonly()">Readonly</button>
+        <hr>
+        <div v-if="form" class="watchers">
+            <h4 class="subtitle is-4">Field Watchers</h4>
+            <div v-for="fieldset of form.fieldsets">
+                <legend v-if="fieldset.label">{{ fieldset.label }}</legend>
+                <mutt-watcher
+                    v-for="field of fieldset.fields"
+                    v-bind:key="`watcher-${field.id}`"
+                    v-bind:field="field"
+                    ></mutt-watcher>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -24,6 +37,9 @@ export default {
         MuttVue
     },
     methods: {
+        setForm(form) {
+            this.form = form
+        },
         makeReadonly() {
             this.readonly = !this.readonly
         },
@@ -36,6 +52,7 @@ export default {
     },
     data() {
         return {
+            form: null,
             readonly: false,
             schema: {
                 textField: {
@@ -213,5 +230,16 @@ li {
 
 a {
   color: #42b983;
+}
+
+.mutt-watcher__title {
+    font-weight: bold;
+}
+.mutt-watcher__value {
+    font-style: italic;
+}
+
+.mutt-watcher--errors > .mutt-watcher__title {
+    color: red;
 }
 </style>
