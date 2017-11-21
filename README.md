@@ -1,4 +1,4 @@
-<img src="docs/mutt-vue.svg" alt="Mutt" width="275">
+![Mutt Vue](docs/mutt-vue.svg)
 
 # Mutt Forms Vue
 
