@@ -1,4 +1,4 @@
-<img src="./docs/mutt-vue.svg" alt="Mutt Vue" width="275">
+<img src="./docs/mutt-vue.svg?sanitize=true" alt="Mutt Vue" width="275">
 
 # Mutt Forms Vue
 
