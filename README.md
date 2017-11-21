@@ -1,4 +1,4 @@
-![Mutt Vue](docs/mutt-vue.svg)
+![Mutt Vue](https://raw.githubusercontent.com/boughtbymany/mutt-forms-vue/master/docs/mutt-vue.svg?sanitize=true)
 
 # Mutt Forms Vue
 
