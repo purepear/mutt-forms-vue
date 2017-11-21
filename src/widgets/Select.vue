@@ -7,7 +7,7 @@
             v-if="isReadOnly"
             v-bind:value="field.value"></readonly-widget>
 
-        <div class="mutt-field-choice-wrap">
+        <div class="mutt-field-choice-wrap select">
             <select
                 v-if="!isReadOnly"
                 :class="getFieldClass()"
