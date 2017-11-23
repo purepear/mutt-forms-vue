@@ -14,7 +14,6 @@
             v-bind:class="getFieldClass()"
             v-bind:name="field.name"
             v-bind:id="field.name"
-            v-bind:value="value"
             v-on:change="submitCallback"
             v-model="value">
         <help-widget

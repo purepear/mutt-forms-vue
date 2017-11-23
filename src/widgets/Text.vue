@@ -13,7 +13,6 @@
             :class="getFieldClass()"
             :placeholder="field.options.placeholder"
             v-bind:name="field.name"
-            v-bind:value="value"
             v-on:keypress.enter.prevent="submitCallback"
             v-model="value">
         <help-widget

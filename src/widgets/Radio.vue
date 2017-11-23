@@ -13,10 +13,9 @@
             class="mutt-field-radio-item">
             <input
                 type="radio"
-                v-model="value"
+                v-model="choice[0]"
                 v-bind:name="field.id"
                 v-bind:id="`${field.id}-${choice[0]}`"
-                v-bind:value="choice[0]"
                 v-bind:class="getFieldClass()"
                 v-on:change="select(choice[0], choice[1])">
             <label
