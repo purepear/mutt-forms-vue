@@ -4,7 +4,6 @@
             type="hidden"
             :class="getFieldClass()"
             v-bind:name="field.name"
-            v-bind:value="value"
             v-model="value">
     </div>
 </template>
