@@ -3,8 +3,8 @@
         'mutt-watcher': true,
         'mutt-watcher--errors': hasFieldErrors
     }">
-        <span class="mutt-watcher__title" v-if="getLabel()">
-            {{ getLabel() }}:
+        <span class="mutt-watcher__title" v-if="getLabel">
+            {{ getLabel }}:
         </span>
         <span v-if="field.type === 'object'" class="mutt-watcher__value">
             <mutt-watcher
@@ -56,9 +56,7 @@ export default {
                 return true
             }
             return false
-        }
-    },
-    methods: {
+        },
         getLabel() {
             let label = this.field.label
 
