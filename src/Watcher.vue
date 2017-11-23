@@ -3,8 +3,8 @@
         'mutt-watcher': true,
         'mutt-watcher--errors': hasFieldErrors
     }">
-        <span class="mutt-watcher__title">
-            {{ getLabel() }}:
+        <span class="mutt-watcher__title" v-if="getLabel">
+            {{ getLabel }}:
         </span>
         <span v-if="field.type === 'object'" class="mutt-watcher__value">
             <mutt-watcher
@@ -56,11 +56,13 @@ export default {
                 return true
             }
             return false
-        }
-    },
-    methods: {
+        },
         getLabel() {
             let label = this.field.label
+
+            if(!label) {
+                return false
+            }
 
             if(this.field.label.indexOf('_') > -1) {
                 label = capitalize(this.field.label.replace('_', ' '))
@@ -71,3 +73,4 @@ export default {
     }
 }
 </script>
+
