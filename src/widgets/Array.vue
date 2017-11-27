@@ -7,6 +7,10 @@
                 v-bind:field="slotField"
                 v-bind:readonly="readonly"
                 v-on:callback="bubble"></mutt-widget>
+            <error-widget
+                v-bind:field="field"
+                v-bind:errors="errors"
+                v-bind:errorClass="getErrorClass()"></error-widget>
         </div>
     </div>
 </template>
