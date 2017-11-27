@@ -47,6 +47,7 @@ export default {
             console.log('Widget Callback: ', JSON.stringify(payload, null, 2))
         },
         submit() {
+            debugger
             console.log('SUBMITTED')
         }
     },
