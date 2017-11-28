@@ -1,7 +1,7 @@
 {
   "name": "mutt-forms-vue",
   "description": "Mutt forms - VueJS integration",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "author": "Bought By Many <dev@boughtbymany.com>",
   "license": "MIT",
   "main": "src/main.js",
@@ -30,7 +30,7 @@
     "mutt-forms", "vue", "vuejs", "forms", "htmlforms", "form", "mutt"
   ],
   "dependencies": {
-    "mutt-forms": ">=1.6.1",
+    "mutt-forms": ">=1.6.2",
     "vue": "^2.5.2"
   },
   "devDependencies": {
