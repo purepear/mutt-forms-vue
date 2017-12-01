@@ -3833,9 +3833,9 @@ mute-stream@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
 
-mutt-forms@>=1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/mutt-forms/-/mutt-forms-1.6.0.tgz#e793d455a716c10218707536ac769823541c056b"
+mutt-forms@>=1.6.3:
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/mutt-forms/-/mutt-forms-1.6.3.tgz#704300b6fb4f011c4005130450683408e41cba79"
 
 nan@^2.3.0:
   version "2.7.0"
@@ -5217,6 +5217,10 @@ stream-http@^2.3.1:
 strict-uri-encode@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/strict-uri-encode/-/strict-uri-encode-1.1.0.tgz#279b225df1d582b1f54e65addd4352e18faa0713"
+
+string-format@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/string-format/-/string-format-0.5.0.tgz#bfc4a69a250f17f273d97336797daf5dca6ecf30"
 
 string-length@^2.0.0:
   version "2.0.0"

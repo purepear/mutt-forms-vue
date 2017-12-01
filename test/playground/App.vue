@@ -158,6 +158,9 @@ export default {
                     },
                     objectField: {
                         label: 'Object Field',
+                        watcher: {
+                            format: '{firstName}'
+                        },
                         firstName: {
                             label: 'First Name'
                         },

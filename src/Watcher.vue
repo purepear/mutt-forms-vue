@@ -6,14 +6,18 @@
         <span class="mutt-watcher__title" v-if="getLabel">
             {{ getLabel }}:
         </span>
-        <span v-if="field.type === 'object'" class="mutt-watcher__value">
+        <span
+            v-if="field.type === 'object' && !getWatcherFormat"
+            class="mutt-watcher__value">
             <mutt-watcher
                 v-for="objectField of field.object"
                 v-bind:key="objectField.id"
                 v-bind:field="objectField"
                 ></mutt-watcher>
         </span>
-        <span v-else-if="field.type === 'array'" class="mutt-watcher__value">
+        <span
+            v-else-if="field.type === 'array' && !getWatcherFormat"
+            class="mutt-watcher__value">
             <mutt-watcher
                 v-for="slotField of field.slots"
                 v-bind:key="slotField.id"
@@ -28,6 +32,9 @@
 
 <script>
 import { capitalize } from './utils'
+import StringFormat from 'string-format'
+
+StringFormat.extend(String.prototype, {})
 
 /**
  * Utility to 'watch' a field value. Typically this is done where
@@ -48,6 +55,13 @@ export default {
             if(this.field.value === null) {
                 return '-'
             }
+
+            let valueFormat = this.getWatcherFormat
+
+            if(valueFormat) {
+                return valueFormat.format(this.field.value)
+            }
+
             return this.field.value
         },
         // As above, we need to make this reactive
@@ -69,8 +83,15 @@ export default {
             }
 
             return label
+        },
+        getWatcherFormat() {
+            if(this.field.options.hasOwnProperty('watcher')) {
+                if(this.field.options.watcher.hasOwnProperty('format')) {
+                    return this.field.options.watcher.format
+                }
+            }
+            return null
         }
     }
 }
 </script>
-
