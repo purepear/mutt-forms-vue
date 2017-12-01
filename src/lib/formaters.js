@@ -7,11 +7,13 @@ StringFormat.extend(String.prototype, {})
 
 export default {
     datetime(value, options) {
-
+        let date = new Date(Date.parse(value))
+        return date.toLocaleString()
     },
 
     date(value, options) {
-
+        let date = new Date(Date.parse(value))
+        return date.toLocaleDateString()
     },
 
     capitalize(value, options) {
