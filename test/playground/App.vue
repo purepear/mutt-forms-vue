@@ -171,6 +171,15 @@ export default {
                             label: 'Last Name'
                         }
                     },
+                    arrayObjField: {
+                        format: {
+                            list: true,
+                            item: {
+                                type: 'template',
+                                template: '{lastName}'
+                            }
+                        }
+                    },
                     hiddenField: {
                         widget: 'hidden'
                     }

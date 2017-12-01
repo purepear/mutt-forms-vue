@@ -27,6 +27,7 @@
                 v-for="slotField of field.slots"
                 v-bind:key="slotField.id"
                 v-bind:field="slotField"
+                v-bind:formatter="getItemFormatter"
                 v-bind:allowLabel="stopLabelPropogation"
                 ></mutt-watcher>
         </span>
@@ -52,6 +53,11 @@ export default {
             type: Object,
             required: true
         },
+        formatter: {
+            type: Object,
+            required: false,
+            default: null
+        },
         allowLabel: {
             type: Boolean,
             default: true
@@ -64,23 +70,18 @@ export default {
                 return '-'
             }
 
-            if(this.field.options.hasOwnProperty('format')) {
+            if(this.formatter) {
+                return this.getFormattedValue(
+                    this.formatter,
+                    this.field.value
+                )
+            } else if(this.field.options.hasOwnProperty('format')) {
                 let fieldFormat = this.field.options.format
 
-                if(typeof fieldFormat === 'string') {
-                    if(Formatters.hasOwnProperty(fieldFormat)) {
-                        return Formatters[fieldFormat](this.field.value)
-                    }
-                } else {
-                    let formatType = fieldFormat.type
-
-                    if(Formatters.hasOwnProperty(formatType)) {
-                        return Formatters[formatType](
-                            this.field.value,
-                            fieldFormat
-                        )
-                    }
-                }
+                return this.getFormattedValue(
+                    fieldFormat,
+                    this.field.value
+                )
             }
 
             return this.field.value
@@ -114,8 +115,40 @@ export default {
                 if(this.field.options.format === 'list') {
                     return false
                 }
+                if(this.field.options.format.hasOwnProperty('list') &&
+                    this.field.options.format.list) {
+                    return false
+                }
             }
             return true
+        },
+        getItemFormatter() {
+            if(this.field.options.hasOwnProperty('format')) {
+                if(this.field.options.format.hasOwnProperty('item')) {
+                    return this.field.options.format.item
+                }
+            }
+            return null
+        }
+    },
+    methods: {
+        getFormattedValue(formatter, value) {
+            if(typeof formatter === 'string') {
+                if(Formatters.hasOwnProperty(formatter)) {
+                    return Formatters[formatter](value)
+                }
+            } else {
+                let formatType = formatter.type
+
+                if(Formatters.hasOwnProperty(formatType)) {
+                    return Formatters[formatType](
+                        this.field.value,
+                        formatter
+                    )
+                }
+            }
+
+            return value
         }
     }
 }
