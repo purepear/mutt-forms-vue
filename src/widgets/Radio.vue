@@ -6,7 +6,6 @@
         <label-widget
             v-bind:field="field"
             v-bind:fieldId="getFieldId()"></label-widget>
-
         <div
             v-if="!isReadOnly"
             v-for="(choice, index) of field.choices"
@@ -23,7 +22,6 @@
                 v-bind:for="`${field.id}-${choice[0]}`"
                 class="mutt-label">{{ choice[1] }}</label>
         </div>
-
         <readonly-widget
             v-if="isReadOnly"
             v-bind:value="field.value"></readonly-widget>

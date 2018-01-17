@@ -129,7 +129,8 @@ export default {
                         required: true
                     },
                     textField1: {
-                        label: 'Text Field 1'
+                        label: 'Text Field 1',
+                        format: 'capitalize'
                     },
                     textareaField: {
                         label: 'Textarea Field',
@@ -154,15 +155,29 @@ export default {
                         ]
                     },
                     arrayField: {
-                        label: 'Array Field'
+                        label: 'Array Field',
+                        format: 'list'
                     },
                     objectField: {
                         label: 'Object Field',
+                        format: {
+                            type: 'template',
+                            template: '{firstName}'
+                        },
                         firstName: {
                             label: 'First Name'
                         },
                         lastName: {
                             label: 'Last Name'
+                        }
+                    },
+                    arrayObjField: {
+                        format: {
+                            list: true,
+                            item: {
+                                type: 'template',
+                                template: '{lastName}'
+                            }
                         }
                     },
                     hiddenField: {

@@ -7,17 +7,28 @@
             {{ getLabel }}:
         </span>
         <span v-if="field.type === 'object'" class="mutt-watcher__value">
-            <mutt-watcher
-                v-for="objectField of field.object"
-                v-bind:key="objectField.id"
-                v-bind:field="objectField"
-                ></mutt-watcher>
+            <span
+                v-if="!field.options.hasOwnProperty('format')"
+                class="mutt-watcher__value--object">
+                <mutt-watcher
+                    v-for="objectField of field.object"
+                    v-bind:key="objectField.id"
+                    v-bind:field="objectField"
+                    ></mutt-watcher>
+            </span>
+            <span
+                v-else
+                class="mutt-watcher__value--formatter">
+                {{ getFieldValue }}
+            </span>
         </span>
         <span v-else-if="field.type === 'array'" class="mutt-watcher__value">
             <mutt-watcher
                 v-for="slotField of field.slots"
                 v-bind:key="slotField.id"
                 v-bind:field="slotField"
+                v-bind:formatter="getItemFormatter"
+                v-bind:allowLabel="stopLabelPropogation"
                 ></mutt-watcher>
         </span>
         <span v-else class="mutt-watcher__value">
@@ -28,6 +39,7 @@
 
 <script>
 import { capitalize } from './utils'
+import Formatters from './lib/formaters'
 
 /**
  * Utility to 'watch' a field value. Typically this is done where
@@ -40,6 +52,15 @@ export default {
         field: {
             type: Object,
             required: true
+        },
+        formatter: {
+            type: Object,
+            required: false,
+            default: null
+        },
+        allowLabel: {
+            type: Boolean,
+            default: true
         }
     },
     computed: {
@@ -48,6 +69,21 @@ export default {
             if(this.field.value === null) {
                 return '-'
             }
+
+            if(this.formatter) {
+                return this.getFormattedValue(
+                    this.formatter,
+                    this.field.value
+                )
+            } else if(this.field.options.hasOwnProperty('format')) {
+                let fieldFormat = this.field.options.format
+
+                return this.getFormattedValue(
+                    fieldFormat,
+                    this.field.value
+                )
+            }
+
             return this.field.value
         },
         // As above, we need to make this reactive
@@ -58,6 +94,10 @@ export default {
             return false
         },
         getLabel() {
+            if(!this.allowLabel) {
+                return false
+            }
+
             let label = this.field.label
 
             if(!label) {
@@ -69,8 +109,47 @@ export default {
             }
 
             return label
+        },
+        stopLabelPropogation() {
+            if(this.field.options.hasOwnProperty('format')) {
+                if(this.field.options.format === 'list') {
+                    return false
+                }
+                if(this.field.options.format.hasOwnProperty('list') &&
+                    this.field.options.format.list) {
+                    return false
+                }
+            }
+            return true
+        },
+        getItemFormatter() {
+            if(this.field.options.hasOwnProperty('format')) {
+                if(this.field.options.format.hasOwnProperty('item')) {
+                    return this.field.options.format.item
+                }
+            }
+            return null
+        }
+    },
+    methods: {
+        getFormattedValue(formatter, value) {
+            if(typeof formatter === 'string') {
+                if(Formatters.hasOwnProperty(formatter)) {
+                    return Formatters[formatter](value)
+                }
+            } else {
+                let formatType = formatter.type
+
+                if(Formatters.hasOwnProperty(formatType)) {
+                    return Formatters[formatType](
+                        this.field.value,
+                        formatter
+                    )
+                }
+            }
+
+            return value
         }
     }
 }
 </script>
-
