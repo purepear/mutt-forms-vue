@@ -10,6 +10,7 @@
             v-if="!isReadOnly"
             ref="text"
             type="text"
+			:id="getFieldId()"
             :class="getFieldClass()"
             :placeholder="field.options.placeholder"
             v-bind:name="field.name"

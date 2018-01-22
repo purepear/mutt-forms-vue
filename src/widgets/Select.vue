@@ -10,6 +10,7 @@
         <div class="mutt-field-choice-wrap select">
             <select
                 v-if="!isReadOnly"
+				:id="getFieldId()"
                 :class="getFieldClass()"
                 v-bind:name="field.name"
                 v-on:change="submitCallback"

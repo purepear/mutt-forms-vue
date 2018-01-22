@@ -9,6 +9,7 @@
         <textarea
             v-if="!isReadOnly"
             ref="textarea"
+			:id="getFieldId()"
             :class="getFieldClass()"
             v-bind:name="field.name"
             v-on:keypress.enter.prevent="submitCallback"
