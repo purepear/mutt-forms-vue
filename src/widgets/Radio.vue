@@ -13,9 +13,10 @@
             <input
                 type="radio"
                 v-model="value"
-                v-bind:name="field.id"
-                v-bind:id="`${field.id}-${choice[0]}`"
-                v-bind:class="getFieldClass()"
+                :name="field.id"
+            	:id="`${field.id}-${choice[0]}`"
+                :class="getFieldClass()"
+                :aria-describedby="field.options.hasOwnProperty('help') ? `${getFieldId()}-help` : null"
                 v-bind:value="choice[0]"
                 v-on:change="select(choice[0], choice[1])">
             <label

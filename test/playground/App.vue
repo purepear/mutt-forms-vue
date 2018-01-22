@@ -126,7 +126,8 @@ export default {
                 fields: {
                     textField: {
                         label: 'Text Field',
-                        required: true
+                        required: true,
+                        help: 'Enter something helpful...'
                     },
                     textField1: {
                         label: 'Text Field 1',

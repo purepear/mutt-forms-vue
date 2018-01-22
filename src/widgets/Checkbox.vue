@@ -11,9 +11,10 @@
         <input
             v-if="!isReadOnly"
             type="checkbox"
-			v-bind:id="getFieldId()"
-            v-bind:class="getFieldClass()"
-            v-bind:name="field.name"
+            :id="getFieldId()"
+        	:class="getFieldClass()"
+        	:name="field.name"
+            :aria-describedby="field.options.hasOwnProperty('help') ? `${getFieldId()}-help` : null"
             v-on:change="submitCallback"
             v-model="value">
         <help-widget

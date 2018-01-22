@@ -10,10 +10,11 @@
             v-if="!isReadOnly"
             ref="text"
             type="text"
-			:id="getFieldId()"
+            :id="getFieldId()"
             :class="getFieldClass()"
             :placeholder="field.options.placeholder"
-            v-bind:name="field.name"
+            :name="field.name"
+            :aria-describedby="field.options.hasOwnProperty('help') ? `${getFieldId()}-help` : null"
             v-on:keypress.enter.prevent="submitCallback"
             v-model="value">
         <help-widget
