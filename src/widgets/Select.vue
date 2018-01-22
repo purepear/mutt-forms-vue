@@ -13,6 +13,7 @@
                 :id="getFieldId()"
                 :class="getFieldClass()"
             	:name="field.name"
+                :aria-invalid="hasErrors ? 'true' : null"
                 :aria-describedby="field.options.hasOwnProperty('help') ? `${getFieldId()}-help` : null"
                 v-on:change="submitCallback"
                 v-model="field.value">

@@ -14,6 +14,7 @@
             :class="getFieldClass()"
             :placeholder="field.options.placeholder"
             :name="field.name"
+            :aria-invalid="hasErrors ? 'true' : null"
             :aria-describedby="field.options.hasOwnProperty('help') ? `${getFieldId()}-help` : null"
             v-on:keypress.enter.prevent="submitCallback"
             v-model="value">

@@ -16,6 +16,7 @@
                 :name="field.id"
             	:id="`${field.id}-${choice[0]}`"
                 :class="getFieldClass()"
+                :aria-invalid="hasErrors ? 'true' : null"
                 :aria-describedby="field.options.hasOwnProperty('help') ? `${getFieldId()}-help` : null"
                 v-bind:value="choice[0]"
                 v-on:change="select(choice[0], choice[1])">
