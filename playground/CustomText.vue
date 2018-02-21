@@ -1,9 +1,6 @@
 <template>
     <div v-if="field" :class="getFieldWrapperClass()">
-        SPECIAL
-        <label-widget
-            v-bind:field="field"
-            v-bind:fieldId="getFieldId()"></label-widget>
+        CUSTOM LABEL
         <readonly-widget
             v-if="isReadOnly"
             v-bind:value="field.value"></readonly-widget>
