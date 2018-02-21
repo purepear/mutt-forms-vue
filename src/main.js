@@ -50,9 +50,11 @@ export default {
 
         // We may in future want to extend the component list
         if(options && options.hasOwnProperty('plugins')) {
-            components = Object.assign({
+            // Ensure that plugins allow for overriding core components
+            components = {
+                ...components,
                 ...options.plugins
-            }, components)
+            }
         }
 
         // Setup a new instance of the config, this will later
@@ -80,24 +82,11 @@ export default {
             }
 
             Mutt.config.registerWidget(type, VueWidgetProxy)
-        }
 
-        // TODO: REFACTOR
-        let VueWidgetProxy = function(
-            field, type, id, name, label,
-            attribs = {}, options = {}, initial = null
-        ) {
-            return new VueWidget(
-                field, type, id, name, label,
-                attribs, options, initial
-            )
+            if(type === 'text') {
+                Mutt.config.registerWidget('string', VueWidgetProxy)
+            }
         }
-
-        VueWidgetProxy.getWidgetName = () => {
-            return 'mutt-text'
-        }
-
-        Mutt.config.registerWidget('string', VueWidgetProxy)
 
         // Register the binding widget
         Vue.component('mutt-widget', {

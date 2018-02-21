@@ -29,7 +29,7 @@
 <script>
 
 // TEST LAYOUT
-import MuttVue from '../../src/Form.vue'
+import MuttVue from '../src/Form.vue'
 
 export default {
     name: 'app',
