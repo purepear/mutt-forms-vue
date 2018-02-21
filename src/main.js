@@ -50,9 +50,10 @@ export default {
 
         // We may in future want to extend the component list
         if(options && options.hasOwnProperty('plugins')) {
-            components = Object.assign({
+            components = {
+                ...components,
                 ...options.plugins
-            }, components)
+            }
         }
 
         // Setup a new instance of the config, this will later
