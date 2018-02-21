@@ -42,6 +42,10 @@ export const ComputedProxy = {
         }
 
         return this.readonly
+    },
+
+    hasErrors() {
+        return (this.errors && this.errors.length > 0)
     }
 }
 

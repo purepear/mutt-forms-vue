@@ -10,8 +10,11 @@
         <div class="mutt-field-choice-wrap select">
             <select
                 v-if="!isReadOnly"
+                :id="getFieldId()"
                 :class="getFieldClass()"
-                v-bind:name="field.name"
+            	:name="field.name"
+                :aria-invalid="hasErrors ? 'true' : null"
+                :aria-describedby="field.options.hasOwnProperty('help') ? `${getFieldId()}-help` : null"
                 v-on:change="submitCallback"
                 v-model="field.value">
                 <option

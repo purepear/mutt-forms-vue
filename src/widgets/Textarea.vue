@@ -9,8 +9,11 @@
         <textarea
             v-if="!isReadOnly"
             ref="textarea"
+            :id="getFieldId()"
             :class="getFieldClass()"
-            v-bind:name="field.name"
+            :name="field.name"
+            :aria-invalid="hasErrors ? 'true' : null"
+            :aria-describedby="field.options.hasOwnProperty('help') ? `${getFieldId()}-help` : null"
             v-on:keypress.enter.prevent="submitCallback"
             v-model="value"></textarea>
         <help-widget

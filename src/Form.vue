@@ -1,5 +1,5 @@
 <template>
-    <form v-if="form" v-on:submit.prevent>
+    <form v-if="form" role="form" v-on:submit.prevent>
         <fieldset v-for="fieldset of form.fieldsets">
             <legend v-if="fieldset.label">{{ fieldset.label }}</legend>
             <mutt-widget

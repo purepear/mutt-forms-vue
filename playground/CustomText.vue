@@ -1,8 +1,6 @@
 <template>
     <div v-if="field" :class="getFieldWrapperClass()">
-        <label-widget
-            v-bind:field="field"
-            v-bind:fieldId="getFieldId()"></label-widget>
+        CUSTOM LABEL
         <readonly-widget
             v-if="isReadOnly"
             v-bind:value="field.value"></readonly-widget>
@@ -29,10 +27,11 @@
 </template>
 
 <script>
-import { MuttWidgetProxy, MethodProxy } from '../utils'
+import { MuttWidgetProxy, MethodProxy } from '../src/utils'
 
 export default Object.assign({}, MuttWidgetProxy, {
-    name: 'mutt-text',
+    name: 'mutt-custom-text',
+    for: 'text',
     methods: Object.assign({}, MethodProxy, {
         getFieldClass() {
             return 'mutt-field mutt-field-text input'
