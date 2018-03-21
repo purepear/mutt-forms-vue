@@ -113,11 +113,3 @@ export const MuttWidgetProxy = {
     }
 }
 
-export function capitalize(lower) {
-    return lower.toLowerCase().replace(
-        /(?:^|\s)\S/g,
-        (letter) => {
-            return letter.toUpperCase()
-        }
-    )
-}

@@ -1,41 +1,45 @@
 <template>
     <div id="app">
-        <h1 class="title is-1">Mutt Forms Vue</h1>
-        <mutt-vue
-            v-bind:schema="schema"
-            v-bind:options="options"
-            v-bind:data="data"
-            v-bind:readonly="readonly"
-            v-on:init="setForm"
-            v-on:callback="callbackPrinter"
-            v-on:submit="submit"
-            ></mutt-vue>
-        <button v-on:click.prevent="makeReadonly()">Readonly</button>
-        <hr>
-        <div v-if="form" class="watchers">
-            <h4 class="subtitle is-4">Field Watchers</h4>
-            <div v-for="fieldset of form.fieldsets">
-                <legend v-if="fieldset.label">{{ fieldset.label }}</legend>
-                <mutt-watcher
-                    v-for="field of fieldset.fields"
-                    v-bind:key="`watcher-${field.id}`"
-                    v-bind:field="field"
-                    ></mutt-watcher>
-            </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <h3>Form</h3>
+          <mutt-vue
+              v-bind:schema="schema"
+              v-bind:options="options"
+              v-bind:data="data"
+              v-bind:readonly="readonly"
+              v-on:init="setForm"
+              v-on:callback="callbackPrinter"
+              v-on:submit="submit"
+              ></mutt-vue>
+          <button v-on:click.prevent="makeReadonly()">Readonly</button>
+          <hr v-if="submission">
+          <div v-if="submission">
+            <pre>
+{{ submission }}
+            </pre>
+          </div>
         </div>
+        <div class="col-lg-6">
+          <div v-if="form" class="watchers">
+              <h3>Watchers</h3>
+              <div v-for="fieldset of form.fieldsets">
+                  <legend v-if="fieldset.label">{{ fieldset.label }}</legend>
+                  <mutt-watcher
+                      v-for="field of fieldset.fields"
+                      v-bind:key="`watcher-${field.id}`"
+                      v-bind:field="field"
+                      ></mutt-watcher>
+              </div>
+          </div>
+         </div>
+       </div>
     </div>
 </template>
 
 <script>
-
-// TEST LAYOUT
-import MuttVue from '../src/Form.vue'
-
 export default {
-    name: 'app',
-    components: {
-        MuttVue
-    },
+    name: 'demo-app',
     methods: {
         setForm(form) {
             this.form = form
@@ -47,14 +51,16 @@ export default {
             console.log('Widget Callback: ', JSON.stringify(payload, null, 2))
         },
         submit() {
-            debugger
-            console.log('SUBMITTED')
+            let data = this.form.data()
+            this.submission = JSON.stringify(data, null, 2)
+            console.log('SUBMITTED ', this.submission)
         }
     },
     data() {
         return {
             form: null,
             readonly: false,
+            submission: null,
             schema: {
                 textField: {
                     type: 'string'
@@ -221,33 +227,6 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
-
 .mutt-watcher__title {
     font-weight: bold;
 }

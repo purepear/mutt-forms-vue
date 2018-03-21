@@ -3,7 +3,7 @@
  * Wrapper for Mutt Forms for Vue.js
  **/
 
-import Mutt, { widgets } from 'mutt-forms'
+import Mutt from 'mutt-forms'
 
 // Widgets
 import MuttVue from './Form.vue'
@@ -23,7 +23,7 @@ Proxy used to mock Widget interface to Mutt.
 NOTE: This is never used in practice as Vue components
 overwrite this value and masqurade as Mutt Widgets
 */
-export class VueWidget extends widgets.Widget {
+class VueWidget extends Mutt.widgets.Widget {
     constructor(field, type, id, name, label,
         attribs = {}, options = {}, initial = null) {
         super()
@@ -49,7 +49,7 @@ export default {
         }
 
         // We may in future want to extend the component list
-        if(options && options.hasOwnProperty('plugins')) {
+        if (options && options.hasOwnProperty('plugins')) {
             // Ensure that plugins allow for overriding core components
             components = {
                 ...components,
@@ -59,7 +59,7 @@ export default {
 
         // Setup a new instance of the config, this will later
         // be used to map field types back to widgets
-        for(let component of Object.values(components)) {
+        for (let component of Object.values(components)) {
             let name = component.name
             let type = name.replace('mutt-', '')
 
@@ -100,7 +100,7 @@ export default {
                     // components are registered globally within Vue, we just
                     // need to resolve the name
                     let resolveWidget = (widget) => {
-                        if(typeof widget === 'function') {
+                        if (typeof widget === 'function') {
                             if(widget.name === 'VueWidgetProxy') {
                                 return widget.getWidgetName()
                             }
@@ -110,14 +110,14 @@ export default {
                     }
 
                     // If a widget is specified directly, we always use this
-                    if(this.widget) {
+                    if (this.widget) {
                         return resolveWidget(
                             Mutt.config.getWidget(this.widget)
                         )
                     }
 
                     // Option overides take next priority
-                    if(this.field.options.hasOwnProperty('widget')) {
+                    if (this.field.options.hasOwnProperty('widget')) {
                         return resolveWidget(
                             Mutt.config.getWidget(this.field.options.widget)
                         )
@@ -125,7 +125,7 @@ export default {
 
                     // Hidden is a special case, as this can be specified using
                     // a non-widget key
-                    if(this.field.options.hasOwnProperty('hidden')) {
+                    if (this.field.options.hasOwnProperty('hidden')) {
                         if(this.field.options.hidden) {
                             return resolveWidget(Mutt.config.getWidget('hidden'))
                         }

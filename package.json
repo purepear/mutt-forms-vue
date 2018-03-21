@@ -1,10 +1,11 @@
 {
   "name": "mutt-forms-vue",
   "description": "Mutt forms - VueJS integration",
-  "version": "0.11.0",
+  "version": "1.0.0",
   "author": "Bought By Many <dev@boughtbymany.com>",
   "license": "MIT",
   "main": "src/main.js",
+  "module": "dist/mutt-forms-vue.es.js",
   "contributors": [
     {
       "name": "Jack Prior",
@@ -20,11 +21,7 @@
     }
   ],
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "lint": "eslint --ext .js,.vue src test/specs",
-    "linter": "yarn run lint; exit 0",
-    "test": "yarn run jest"
+    "build": "rollup -c"
   },
   "keywords": [
     "mutt-forms",
@@ -35,42 +32,28 @@
     "form",
     "mutt"
   ],
-  "dependencies": {
-    "mutt-forms": "^1.7.x",
-    "string-format": "^0.5.0",
+  "dependencies": {},
+  "peerDependencies": {
+    "mutt-forms": ">= 1.8.0 < 2",
     "vue": "^2.5.x"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",
     "babel-loader": "^7.1.2",
-    "babel-polyfill": "^6.26.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "chai": "^3.5.0",
-    "cross-env": "^3.0.0",
-    "css-loader": "^0.25.0",
     "eslint": "^4.1.1",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-friendly-formatter": "^3.0.0",
-    "eslint-loader": "^1.9.0",
+    "eslint-config-google": "^0.9.1",
     "eslint-plugin-html": "^3.0.0",
-    "eslint-plugin-import": "^2.6.1",
-    "eslint-plugin-node": "^5.1.0",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "file-loader": "^0.9.0",
     "jest": "^21.2.1",
+    "rollup": "^0.57.1",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-uglify": "^3.0.0",
+    "rollup-plugin-vue": "^3.0.0",
     "vue-loader": "^12.2.1",
-    "vue-template-compiler": "^2.5.x",
-    "webpack": "^2.6.1",
-    "webpack-dev-server": "^2.4.5"
-  },
-  "babel": {
-    "babelrc": false,
-    "presets": [
-      "env",
-      "stage-0"
-    ]
+    "vue-template-compiler": "^2.5.x"
   }
 }

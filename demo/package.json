@@ -1,0 +1,31 @@
+{
+  "name": "mutt-forms-vue-playground",
+  "description": "Mutt forms Vue Playground",
+  "version": "0.0.1",
+  "author": "Bought By Many <dev@boughtbymany.com>",
+  "license": "MIT",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot"
+  },
+  "dependencies": {
+    "mutt-forms": "1.8.x",
+    "vue": "2.5.16"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.1",
+    "babel-loader": "^7.1.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "cross-env": "^3.0.0",
+    "css-loader": "^0.25.0",
+    "eslint": "^4.1.1",
+    "eslint-plugin-html": "^3.0.0",
+    "file-loader": "^0.9.0",
+    "vue-loader": "^12.2.1",
+    "vue-template-compiler": "2.5.x",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7"
+  }
+}

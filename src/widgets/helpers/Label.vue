@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { capitalize } from '../../utils'
+import Formatters from '../../lib/formaters'
 
 export default {
     name: 'label-widget',
@@ -15,7 +15,7 @@ export default {
             let label = this.field.label
 
             if(this.field.label.indexOf('_') > -1) {
-                label = capitalize(this.field.label.replace('_', ' '))
+                label = Formatters.capitalize(this.field.label.replace('_', ' '))
             }
 
             return label
