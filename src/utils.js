@@ -2,6 +2,8 @@
 * Utilities
 */
 
+'use strict'
+
 import LabelWidget from './widgets/helpers/Label.vue'
 import ErrorWidget from './widgets/helpers/Error.vue'
 import HelpWidget from './widgets/helpers/Help.vue'

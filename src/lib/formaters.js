@@ -2,6 +2,8 @@
  * Formatters for output types
  */
 
+'use strict'
+
 export default {
     datetime(value, options) {
         let date = new Date(Date.parse(value))

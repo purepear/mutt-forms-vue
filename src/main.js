@@ -3,6 +3,8 @@
  * Wrapper for Mutt Forms for Vue.js
  **/
 
+'use strict'
+
 import Mutt from 'mutt-forms'
 
 // Widgets
@@ -16,6 +18,14 @@ import MuttChoice from './widgets/Select.vue'
 import MuttObject from './widgets/Object.vue'
 import MuttArray from './widgets/Array.vue'
 import MuttHidden from './widgets/Hidden.vue'
+
+import {
+  PropsProxy,
+  DataProxy,
+  ComputedProxy,
+  MethodProxy,
+  MuttWidgetProxy
+} from './utils'
 
 /*
 Proxy used to mock Widget interface to Mutt.
@@ -158,5 +168,13 @@ export default {
         Vue.component('mutt-vue', MuttVue)
 
         Vue.prototype.$mutt = Mutt
-    }
+    },
+
+    utils: {
+       PropsProxy,
+       DataProxy,
+       ComputedProxy,
+       MethodProxy,
+       MuttWidgetProxy,
+    },
 }
