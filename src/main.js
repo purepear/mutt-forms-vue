@@ -12,6 +12,7 @@ import MuttVue from './Form.vue'
 import MuttWatcher from './Watcher.vue'
 import MuttText from './widgets/Text.vue'
 import MuttTextarea from './widgets/Textarea.vue'
+import MuttNumber from './widgets/Number.vue'
 import MuttCheckbox from './widgets/Checkbox.vue'
 import MuttRadio from './widgets/Radio.vue'
 import MuttChoice from './widgets/Select.vue'
@@ -50,6 +51,7 @@ export default {
         let components = {
             MuttText,
             MuttTextarea,
+            MuttNumber,
             MuttCheckbox,
             MuttChoice,
             MuttObject,

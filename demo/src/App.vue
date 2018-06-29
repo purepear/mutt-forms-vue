@@ -2,7 +2,7 @@
     <div id="app">
       <div class="row">
         <div class="col-lg-6">
-          <h3>Form</h3>
+          <h3>Form.</h3>
           <mutt-vue
               v-bind:schema="schema"
               v-bind:options="options"
@@ -70,6 +70,9 @@ export default {
                 },
                 textareaField: {
                     type: 'string'
+                },
+                numberField: {
+                    type: 'integer'
                 },
                 checkboxField: {
                     type: 'boolean'
@@ -141,6 +144,9 @@ export default {
                     textareaField: {
                         label: 'Textarea Field',
                         widget: 'textarea'
+                    },
+                    numberField: {
+                        label: 'Number Field'
                     },
                     checkboxField: {
                         label: 'Checkbox Field'
