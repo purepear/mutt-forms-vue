@@ -19,11 +19,19 @@ export default {
         'mutt-forms': 'Mutt',
         'vue': 'Vue',
       },
-    }, 
+    },
   ],
   plugins: [
     // IE11 gets upset about fnames....
-    resolve(), vue(), babel(), uglify({mangle: false, keep_fnames: true})
+    resolve(),
+    vue(),
+    babel(),
+    uglify({
+        mangle: false,
+        keep_classnames: true,
+        keep_fnames: true,
+        safari10: true,
+    }),
   ],
   external: [
     'vue',
