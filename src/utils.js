@@ -17,18 +17,18 @@ import ReadonlyWidget from './widgets/helpers/Readonly.vue'
 export const PropsProxy = {
     field: {
         type: Object,
-        required: true
+        required: true,
     },
     readonly: {
         type: Boolean,
-        default: false
-    }
+        default: false,
+    },
 }
 
 export const DataProxy = function() {
     return {
         errors: null,
-        value: null
+        value: null,
     }
 }
 
@@ -39,7 +39,7 @@ export const ComputedProxy = {
             to changes to this.readonly. However, in the case that
             there is an overide, this will always be applied.
         */
-        if(this.field.options.hasOwnProperty('readonly')) {
+        if (this.field.options.hasOwnProperty('readonly')) {
             return this.field.options.readonly
         }
 
@@ -48,7 +48,7 @@ export const ComputedProxy = {
 
     hasErrors() {
         return (this.errors && this.errors.length > 0)
-    }
+    },
 }
 
 export const MethodProxy = {
@@ -61,40 +61,51 @@ export const MethodProxy = {
     },
 
     getFieldClass() {
-        if(this.field.attribs.hasOwnProperty('class')) {
+        if (this.field.attribs.hasOwnProperty('class')) {
             return `mutt-field ${this.field.attribs.class}`
         }
         return 'mutt-field'
     },
 
-    getFieldWrapperClass() { return 'mutt-field-wrapper' },
-    getErrorClass() { return 'mutt-error' },
-    getErrorWrapperClass() { return 'mutt-error-wrapper' },
-    getFieldId() { return this.field.name },
+    getFieldWrapperClass() {
+        return 'mutt-field-wrapper'
+    },
+
+    getErrorClass() {
+        return 'mutt-error'
+    },
+
+    getErrorWrapperClass() {
+        return 'mutt-error-wrapper'
+    },
+
+    getFieldId() {
+        return this.field.name
+    },
 
     refreshErrorState(errors) {
-        if(errors.length > 0) {
+        if (errors.length > 0) {
             this.errors = errors
         }
     },
 
     submitCallback() {
-        if(this.field.validate()) {
+        if (this.field.validate()) {
             this.$emit('callback', {
                 key: this.field.name,
                 value: this.field.value,
                 action: 'submit',
-                validated: true
+                validated: true,
             })
         } else {
             this.$emit('callback', {
                 key: this.field.name,
                 value: this.field.value,
                 action: 'submit',
-                validated: false
+                validated: false,
             })
         }
-    }
+    },
 }
 
 export const MuttWidgetProxy = {
@@ -106,12 +117,11 @@ export const MuttWidgetProxy = {
         LabelWidget,
         ErrorWidget,
         HelpWidget,
-        ReadonlyWidget
+        ReadonlyWidget,
     },
     created() {
         // TODO: Remove once mutt field/widget link fixed
         this.value = this.field.value
         this.field.widget = this
-    }
+    },
 }
-

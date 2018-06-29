@@ -11,6 +11,6 @@
 <script>
 export default {
     name: 'error-widget',
-    props: [ 'errors', 'errorClass', 'field' ]
+    props: ['errors', 'errorClass', 'field'],
 }
 </script>

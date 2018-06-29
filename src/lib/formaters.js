@@ -22,5 +22,5 @@ export default {
 
     prefix(value, options) {
         return `${options.prefix}${value}`
-    }
+    },
 }

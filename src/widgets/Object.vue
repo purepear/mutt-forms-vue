@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { MuttWidgetProxy, MethodProxy } from '../utils'
+import {MuttWidgetProxy, MethodProxy} from '../utils'
 
 export default Object.assign({}, MuttWidgetProxy, {
     name: 'mutt-object',
@@ -23,7 +23,7 @@ export default Object.assign({}, MuttWidgetProxy, {
         },
         bubble(payload) {
             this.$emit('callback', payload)
-        }
-    })
+        },
+    }),
 })
 </script>

@@ -5,6 +5,6 @@
 <script>
 export default {
     name: 'readonly-widget',
-    props: [ 'value' ]
+    props: ['value'],
 }
 </script>

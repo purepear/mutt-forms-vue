@@ -50,31 +50,31 @@ export default {
     props: {
         field: {
             type: Object,
-            required: true
+            required: true,
         },
         formatter: {
             type: Object,
             required: false,
-            default: null
+            default: null,
         },
         allowLabel: {
             type: Boolean,
-            default: true
-        }
+            default: true,
+        },
     },
     computed: {
         // Is computed in order to make the field value reactive
         getFieldValue() {
-            if(this.field.value === null) {
+            if (this.field.value === null) {
                 return '-'
             }
 
-            if(this.formatter) {
+            if (this.formatter) {
                 return this.getFormattedValue(
                     this.formatter,
                     this.field.value
                 )
-            } else if(this.field.options.hasOwnProperty('format')) {
+            } else if (this.field.options.hasOwnProperty('format')) {
                 let fieldFormat = this.field.options.format
 
                 return this.getFormattedValue(
@@ -87,34 +87,36 @@ export default {
         },
         // As above, we need to make this reactive
         hasFieldErrors() {
-            if(this.field.errors.length > 0) {
+            if (this.field.errors.length > 0) {
                 return true
             }
             return false
         },
         getLabel() {
-            if(!this.allowLabel) {
+            if (!this.allowLabel) {
                 return false
             }
 
             let label = this.field.label
 
-            if(!label) {
+            if (!label) {
                 return false
             }
 
-            if(this.field.label.indexOf('_') > -1) {
-                label = Formatters.capitalize(this.field.label.replace('_', ' '))
+            if (this.field.label.indexOf('_') > -1) {
+                label = Formatters.capitalize(
+                    this.field.label.replace('_', ' ')
+                )
             }
 
             return label
         },
         stopLabelPropogation() {
-            if(this.field.options.hasOwnProperty('format')) {
-                if(this.field.options.format === 'list') {
+            if (this.field.options.hasOwnProperty('format')) {
+                if (this.field.options.format === 'list') {
                     return false
                 }
-                if(this.field.options.format.hasOwnProperty('list') &&
+                if (this.field.options.format.hasOwnProperty('list') &&
                     this.field.options.format.list) {
                     return false
                 }
@@ -122,33 +124,31 @@ export default {
             return true
         },
         getItemFormatter() {
-            if(this.field.options.hasOwnProperty('format')) {
-                if(this.field.options.format.hasOwnProperty('item')) {
+            if (this.field.options.hasOwnProperty('format')) {
+                if (this.field.options.format.hasOwnProperty('item')) {
                     return this.field.options.format.item
                 }
             }
             return null
-        }
+        },
     },
     methods: {
         getFormattedValue(formatter, value) {
-            if(typeof formatter === 'string') {
-                if(Formatters.hasOwnProperty(formatter)) {
+            if (typeof formatter === 'string') {
+                if (Formatters.hasOwnProperty(formatter)) {
                     return Formatters[formatter](value)
                 }
             } else {
                 let formatType = formatter.type
-
-                if(Formatters.hasOwnProperty(formatType)) {
+                if (Formatters.hasOwnProperty(formatType)) {
                     return Formatters[formatType](
                         this.field.value,
                         formatter
                     )
                 }
             }
-
             return value
-        }
-    }
+        },
+    },
 }
 </script>

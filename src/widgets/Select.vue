@@ -42,13 +42,13 @@
 </template>
 
 <script>
-import { MuttWidgetProxy, MethodProxy } from '../utils'
+import {MuttWidgetProxy, MethodProxy} from '../utils'
 
 export default Object.assign({}, MuttWidgetProxy, {
     name: 'mutt-choice',
     methods: Object.assign({}, MethodProxy, {
         getDefaultSelect() {
-            if(this.field.options.hasOwnProperty('defaultSelect')) {
+            if (this.field.options.hasOwnProperty('defaultSelect')) {
                 return this.field.options.defaultSelect
             }
             return 'Please select one'
@@ -57,12 +57,12 @@ export default Object.assign({}, MuttWidgetProxy, {
             return 'mutt-field mutt-field-choice'
         },
         select() {
-            if(this.field.validate()) {
+            if (this.field.validate()) {
                 this.$emit('callback', {
                     key: this.field.name,
                     value: this.field.value,
                     action: 'select',
-                    validated: true
+                    validated: true,
                 })
             } else {
                 // Here for completeness but shouldn't really occur?
@@ -70,17 +70,17 @@ export default Object.assign({}, MuttWidgetProxy, {
                     key: this.field.name,
                     value: this.field.value,
                     action: 'select',
-                    validated: false
+                    validated: false,
                 })
             }
-        }
+        },
     }),
     watch: {
         value(newVal, oldVal) {
-            if(this.field.options.callback) {
+            if (this.field.options.callback) {
                 this.field.options.callback(newVal, oldVal)
             }
-        }
-    }
+        },
+    },
 })
 </script>

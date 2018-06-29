@@ -9,14 +9,14 @@
 </template>
 
 <script>
-import { MuttWidgetProxy, MethodProxy } from '../utils'
+import {MuttWidgetProxy, MethodProxy} from '../utils'
 
 export default Object.assign({}, MuttWidgetProxy, {
     name: 'mutt-hidden',
     methods: Object.assign({}, MethodProxy, {
         getFieldClass() {
             return 'mutt-field mutt-field-hidden'
-        }
-    })
+        },
+    }),
 })
 </script>

@@ -30,10 +30,11 @@
 </template>
 
 <script>
-import { MuttWidgetProxy, MethodProxy } from '../utils'
+import {MuttWidgetProxy, MethodProxy} from '../utils'
 
 export default Object.assign({}, MuttWidgetProxy, {
     name: 'mutt-text',
+    alternative: 'string',
     methods: Object.assign({}, MethodProxy, {
         getFieldClass() {
             return 'mutt-field mutt-field-text input'
@@ -42,7 +43,7 @@ export default Object.assign({}, MuttWidgetProxy, {
             this.$nextTick(() => {
                 this.$refs.text.focus()
             })
-        }
-    })
+        },
+    }),
 })
 </script>

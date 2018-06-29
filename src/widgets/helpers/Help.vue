@@ -9,9 +9,11 @@
 <script>
 export default {
     name: 'help-widget',
-    props: [ 'field' ],
+    props: ['field'],
     methods: {
-        getFieldId() { return this.field.name }
-    }
+        getFieldId() {
+            return this.field.name
+        },
+    },
 }
 </script>

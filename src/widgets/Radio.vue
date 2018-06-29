@@ -38,27 +38,27 @@
 </template>
 
 <script>
-import { MuttWidgetProxy, MethodProxy } from '../utils'
+import {MuttWidgetProxy, MethodProxy} from '../utils'
 
 export default Object.assign({}, MuttWidgetProxy, {
     name: 'mutt-radio',
     created() {
         // Booleans do not have choices, so we must contrive
         // them if they aren't already set
-        if(this.field.type === 'boolean') {
-            if(this.field.options.hasOwnProperty('choices')) {
+        if (this.field.type === 'boolean') {
+            if (this.field.options.hasOwnProperty('choices')) {
                 this.field.choices = this.field.options.choices
             } else {
                 this.field.choices = [
-                    [ true, 'Yes' ],
-                    [ false, 'No' ]
+                    [true, 'Yes'],
+                    [false, 'No'],
                 ]
             }
         }
 
         // Set the default value
         // FIXME: not a vue thing
-        if(this.field.options.hasOwnProperty('default')) {
+        if (this.field.options.hasOwnProperty('default')) {
             this.field.value = this.field.options.default
         }
 
@@ -68,7 +68,7 @@ export default Object.assign({}, MuttWidgetProxy, {
         // Copy this prop as we may need to alter/overide it
         this.displayReadonly = this.readonly
 
-        if(this.field.options.hasOwnProperty('readonly')) {
+        if (this.field.options.hasOwnProperty('readonly')) {
             this.displayReadonly = this.field.options.readonly
         }
     },
@@ -80,13 +80,13 @@ export default Object.assign({}, MuttWidgetProxy, {
         select(choice, label) {
             this.value = choice
 
-            if(this.field.validate()) {
+            if (this.field.validate()) {
                 this.$emit('callback', {
                     key: this.field.name,
                     value: this.field.value,
                     action: 'radioSelect',
                     label: label,
-                    validated: true
+                    validated: true,
                 })
             } else {
                 // Here for completeness but shouldn't really occur?
@@ -95,10 +95,10 @@ export default Object.assign({}, MuttWidgetProxy, {
                     value: this.field.value,
                     action: 'radioSelect',
                     label: label,
-                    validated: false
+                    validated: false,
                 })
             }
-        }
-    })
+        },
+    }),
 })
 </script>

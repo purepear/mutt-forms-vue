@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { MuttWidgetProxy, ComputedProxy, MethodProxy } from '../utils'
+import {MuttWidgetProxy, ComputedProxy, MethodProxy} from '../utils'
 
 export default Object.assign({}, MuttWidgetProxy, {
     name: 'mutt-checkbox',
@@ -38,14 +38,14 @@ export default Object.assign({}, MuttWidgetProxy, {
         getLabelClass() {
             return {
                 'mutt-label': true,
-                'mutt-field-checkbox-checked': this.value
+                'mutt-field-checkbox-checked': this.value,
             }
-        }
+        },
     }),
     methods: Object.assign({}, MethodProxy, {
         getFieldClass() {
             return 'mutt-field mutt-field-checkbox checkbox'
-        }
-    })
+        },
+    }),
 })
 </script>

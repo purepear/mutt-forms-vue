@@ -1,7 +1,7 @@
 {
   "name": "mutt-forms-vue",
   "description": "Mutt forms - VueJS integration",
-  "version": "1.2.2",
+  "version": "1.2.4",
   "author": "Bought By Many <dev@boughtbymany.com>",
   "license": "MIT",
   "main": "src/main.js",
@@ -27,7 +27,8 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "prepublish": "yarn run build"
+    "lint": "eslint src --ext .vue",
+    "prepublish": "yarn run lint && yarn run build"
   },
   "keywords": [
     "mutt-forms",
@@ -54,6 +55,7 @@
     "eslint-changes": "^0.1.2",
     "eslint-config-google": "^0.9.1",
     "eslint-plugin-html": "^3.0.0",
+    "eslint-plugin-vue": "^4.5.0",
     "jest": "^21.2.1",
     "rollup": "^0.57.1",
     "rollup-plugin-babel": "^3.0.3",

@@ -25,15 +25,15 @@ import {
   DataProxy,
   ComputedProxy,
   MethodProxy,
-  MuttWidgetProxy
+  MuttWidgetProxy,
 } from './utils'
 
-/*
-Proxy used to mock Widget interface to Mutt.
 
-NOTE: This is never used in practice as Vue components
-overwrite this value and masqurade as Mutt Widgets
-*/
+// Proxy used to mock Widget interface to Mutt.
+// NOTE: This is never used in practice as Vue components
+// overwrite this value and masqurade as Mutt Widgets
+
+/* eslint-disable */
 class VueWidget extends Mutt.widgets.Widget {
     constructor(field, type, id, name, label,
         attribs = {}, options = {}, initial = null) {
@@ -44,6 +44,7 @@ class VueWidget extends Mutt.widgets.Widget {
         return null
     }
 }
+/* eslint-enable */
 
 export default {
     install(Vue, options) {
@@ -57,7 +58,7 @@ export default {
             MuttObject,
             MuttArray,
             MuttRadio,
-            MuttHidden
+            MuttHidden,
         }
 
         // We may in future want to extend the component list
@@ -65,7 +66,7 @@ export default {
             // Ensure that plugins allow for overriding core components
             components = {
                 ...components,
-                ...options.plugins
+                ...options.plugins,
             }
         }
 
@@ -75,7 +76,7 @@ export default {
             let name = component.name
             let type = name.replace('mutt-', '')
 
-            if(component.hasOwnProperty('for')) {
+            if (component.hasOwnProperty('for')) {
                 type = component.for
             }
 
@@ -95,15 +96,23 @@ export default {
 
             Mutt.config.registerWidget(type, VueWidgetProxy)
 
-            if(type === 'text') {
-                Mutt.config.registerWidget('string', VueWidgetProxy)
+            if (component.hasOwnProperty('alternative')) {
+                Mutt.config.registerWidget(
+                    component.alternative, VueWidgetProxy)
             }
         }
 
         // Register the binding widget
         Vue.component('mutt-widget', {
-            template: '<component @callback="callback" :is="this.getWidget()" v-bind:field="field" v-bind:readonly="readonly"></component>',
-            props: [ 'field', 'widget', 'readonly' ],
+            template: `
+                <component
+                    @callback="callback"
+                    :is="this.getWidget()"
+                    v-bind:field="field"
+                    v-bind:readonly="readonly"
+                    ></component>
+            `,
+            props: ['field', 'widget', 'readonly'],
             components: components,
             methods: {
                 getWidget() {
@@ -113,7 +122,7 @@ export default {
                     // need to resolve the name
                     let resolveWidget = (widget) => {
                         if (typeof widget === 'function') {
-                            if(widget.name === 'VueWidgetProxy') {
+                            if (widget.name === 'VueWidgetProxy') {
                                 return widget.getWidgetName()
                             }
                         }
@@ -138,8 +147,10 @@ export default {
                     // Hidden is a special case, as this can be specified using
                     // a non-widget key
                     if (this.field.options.hasOwnProperty('hidden')) {
-                        if(this.field.options.hidden) {
-                            return resolveWidget(Mutt.config.getWidget('hidden'))
+                        if (this.field.options.hidden) {
+                            return resolveWidget(
+                                Mutt.config.getWidget('hidden')
+                            )
                         }
                     }
 
@@ -147,15 +158,15 @@ export default {
                     return resolveWidget(Mutt.config.getWidget(this.field.type))
                 },
 
-                /**
-                 * In order to pass events back to the parent component, we
-                 * provide a single generic options variable so you can get
-                 * everything with $event template var.
-                 */
+                /*
+                In order to pass events back to the parent component, we
+                provide a single generic options variable so you can get
+                everything with $event template var.
+                */
                 callback(options) {
                     this.$emit('callback', options)
-                }
-            }
+                },
+            },
         })
 
         /**

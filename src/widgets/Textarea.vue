@@ -13,7 +13,7 @@
             :class="getFieldClass()"
             :name="field.name"
             :aria-invalid="hasErrors ? 'true' : null"
-            :aria-describedby="field.options.hasOwnProperty('help') ? `${getFieldId()}-help` : null"
+            :aria-describedby="describedBy"
             v-on:keypress.enter.prevent="submitCallback"
             v-model="value"></textarea>
         <help-widget
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { MuttWidgetProxy, MethodProxy } from '../utils'
+import {MuttWidgetProxy, MethodProxy, ComputedProxy} from '../utils'
 
 export default Object.assign({}, MuttWidgetProxy, {
     name: 'mutt-textarea',
@@ -39,7 +39,13 @@ export default Object.assign({}, MuttWidgetProxy, {
             this.$nextTick(() => {
                 this.$refs.textarea.focus()
             })
-        }
-    })
+        },
+    }),
+    computed: Object.assign({}, ComputedProxy, {
+        describedBy() {
+            let help = `${getFieldId()}-help`
+            return field.options.hasOwnProperty('help') ? help : null
+        },
+    }),
 })
 </script>

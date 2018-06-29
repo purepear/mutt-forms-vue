@@ -72,7 +72,7 @@ export default {
                     type: 'string'
                 },
                 numberField: {
-                    type: 'integer'
+                    type: 'number'
                 },
                 checkboxField: {
                     type: 'boolean'

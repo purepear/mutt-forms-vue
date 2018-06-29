@@ -19,18 +19,18 @@ export default {
     props: {
         schema: {
             type: Object,
-            required: true
+            required: true,
         },
         options: {
-            type: Object
+            type: Object,
         },
         data: {
-            type: Object
+            type: Object,
         },
         readonly: {
             type: Boolean,
-            default: false
-        }
+            default: false,
+        },
     },
     created() {
         this.form = new this.$mutt(
@@ -40,13 +40,13 @@ export default {
         this.$emit('init', this.form)
     },
     mounted() {
-        if(this.data) {
+        if (this.data) {
             this.form.populate(this.data)
         }
     },
     data() {
         return {
-            form: null
+            form: null,
         }
     },
     methods: {
@@ -55,7 +55,7 @@ export default {
         },
         submit() {
             this.$emit('submit', this.form)
-        }
-    }
+        },
+    },
 }
 </script>
