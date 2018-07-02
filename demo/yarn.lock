@@ -3484,9 +3484,9 @@ mute-stream@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
 
-mutt-forms@^1.9.1:
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/mutt-forms/-/mutt-forms-1.9.1.tgz#7071a6e3d01643764bfaf8f29d0aa60e3b8bbc0c"
+mutt-forms@^1.9.2:
+  version "1.9.2"
+  resolved "https://registry.yarnpkg.com/mutt-forms/-/mutt-forms-1.9.2.tgz#0d7928cafaae57386a89a16fec370813ceb6d714"
 
 nan@^2.3.0:
   version "2.10.0"

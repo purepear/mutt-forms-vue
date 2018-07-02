@@ -98,7 +98,9 @@ export default {
 
             if (component.hasOwnProperty('alternative')) {
                 Mutt.config.registerWidget(
-                    component.alternative, VueWidgetProxy)
+                    component.alternative,
+                    VueWidgetProxy
+                )
             }
         }
 
