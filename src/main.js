@@ -111,10 +111,11 @@ export default {
                     @callback="callback"
                     :is="this.getWidget()"
                     v-bind:field="field"
+                    v-bind:fieldIndex="fieldIndex"
                     v-bind:readonly="readonly"
                     ></component>
             `,
-            props: ['field', 'widget', 'readonly'],
+            props: ['field', 'widget', 'readonly', 'fieldIndex'],
             components: components,
             methods: {
                 getWidget() {

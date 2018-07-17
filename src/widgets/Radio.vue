@@ -56,12 +56,6 @@ export default Object.assign({}, MuttWidgetProxy, {
             }
         }
 
-        // Set the default value
-        // FIXME: not a vue thing
-        if (this.field.options.hasOwnProperty('default')) {
-            this.field.value = this.field.options.default
-        }
-
         this.value = this.field.value
         this.field.widget = this
 
