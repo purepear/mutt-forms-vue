@@ -43,8 +43,8 @@ export default Object.assign({}, MuttWidgetProxy, {
     }),
     computed: Object.assign({}, ComputedProxy, {
         describedBy() {
-            let help = `${getFieldId()}-help`
-            return field.options.hasOwnProperty('help') ? help : null
+            let help = `${this.getFieldId()}-help`
+            return this.field.options.hasOwnProperty('help') ? help : null
         },
     }),
 })

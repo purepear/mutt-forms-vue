@@ -109,7 +109,7 @@ export default {
             template: `
                 <component
                     @callback="callback"
-                    :is="this.getWidget()"
+                    :is="getWidget()"
                     v-bind:field="field"
                     v-bind:fieldIndex="fieldIndex"
                     v-bind:readonly="readonly"
