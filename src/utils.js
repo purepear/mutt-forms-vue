@@ -68,6 +68,9 @@ export const MethodProxy = {
     },
 
     getFieldWrapperClass() {
+        if (this.hasErrors) {
+            return `mutt-field-wrapper ${this.getErrorWrapperClass()}`
+        }
         return 'mutt-field-wrapper'
     },
 
