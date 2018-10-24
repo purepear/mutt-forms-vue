@@ -56,6 +56,9 @@ export default {
             console.log('SUBMITTED ', this.submission)
         }
     },
+    mounted() {
+        debugger
+    },
     data() {
         return {
             form: null,

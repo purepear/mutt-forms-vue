@@ -6,11 +6,11 @@
   "license": "MIT",
   "main": "src/index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot"
+    "demo": "cross-env NODE_ENV=development webpack-dev-server --hot"
   },
   "dependencies": {
     "mutt-forms": "^1.9.2",
-    "vue": "2.5.16"
+    "vue": "^2.5.17"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
