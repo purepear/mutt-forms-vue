@@ -28,7 +28,7 @@
   "scripts": {
     "build": "rollup -c",
     "lint": "eslint src --ext .vue",
-    "prepublish": "yarn run lint && yarn run build"
+    "prepublish": "npm run lint && npm run build"
   },
   "keywords": [
     "mutt-forms",
