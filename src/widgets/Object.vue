@@ -1,5 +1,5 @@
 <template>
-    <div v-if="field" :class="getFieldWrapperClass()">
+    <div v-if="field" :class="getFieldClass()">
         <fieldset>
             <legend v-if="field.label">{{ field.label }}</legend>
             <mutt-widget
