@@ -15,7 +15,7 @@ Full documentation is available [here](https://nicksnell.gitbooks.io/mutt-forms-
 
 The easiest way to get started with Mutt Forms Vue is to install via Yarn:
 
-`yarn add mutt-forms-vue`
+`npm install mutt-forms-vue`
 
 ### Integrating with Vue
 
