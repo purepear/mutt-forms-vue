@@ -31,11 +31,15 @@ import WidgetMixin from '../mixins/WidgetMixin'
 
 export default {
     name: 'mutt-textarea',
+    mixins: [
+        WidgetMixin,
+    ],
     methods: {
         getFieldClass() {
             let className = 'mutt-field mutt-field-textarea'
 
-            if (this.field.attribs && this.field.attribs.hasOwnProperty('class')) {
+            if (this.field.attribs &&
+                    this.field.attribs.hasOwnProperty('class')) {
                 className = `${className} ${this.field.attribs.class}`
             }
 

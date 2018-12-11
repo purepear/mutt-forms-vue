@@ -42,7 +42,8 @@ export default {
         getFieldClass() {
             let className = 'mutt-field mutt-field-text input'
 
-            if (this.field.attribs && this.field.attribs.hasOwnProperty('class')) {
+            if (this.field.attribs &&
+                    this.field.attribs.hasOwnProperty('class')) {
                 className = `${className} ${this.field.attribs.class}`
             }
 

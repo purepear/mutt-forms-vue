@@ -59,7 +59,8 @@ export default {
         getFieldClass() {
             let className = 'mutt-field mutt-field-choice'
 
-            if (this.field.attribs && this.field.attribs.hasOwnProperty('class')) {
+            if (this.field.attribs &&
+                    this.field.attribs.hasOwnProperty('class')) {
                 className = `${className} ${this.field.attribs.class}`
             }
 
@@ -90,6 +91,6 @@ export default {
                 this.field.options.callback(newVal, oldVal)
             }
         },
-    }
+    },
 }
 </script>

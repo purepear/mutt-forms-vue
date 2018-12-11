@@ -29,9 +29,11 @@ export default {
     ],
     methods: {
         getFieldClass(slotIndex) {
-            let className = `mutt-field-array-item mutt-field-array-item-${slotIndex}`
+            const slot = `mutt-field-array-item-${slotIndex}`
+            let className = `mutt-field-array-item ${slot}`
 
-            if (this.field.attribs && this.field.attribs.hasOwnProperty('class')) {
+            if (this.field.attribs &&
+                this.field.attribs.hasOwnProperty('class')) {
                 className = `${className} ${this.field.attribs.class}`
             }
 

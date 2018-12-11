@@ -24,7 +24,8 @@ export default {
         getFieldClass() {
             let className = 'mutt-field mutt-field-object'
 
-            if (this.field.attribs && this.field.attribs.hasOwnProperty('class')) {
+            if (this.field.attribs &&
+                    this.field.attribs.hasOwnProperty('class')) {
                 className = `${className} ${this.field.attribs.class}`
             }
 
@@ -33,6 +34,6 @@ export default {
         bubble(payload) {
             this.$emit('callback', payload)
         },
-    }
+    },
 }
 </script>
