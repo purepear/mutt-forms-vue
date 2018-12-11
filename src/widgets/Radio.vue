@@ -38,10 +38,13 @@
 </template>
 
 <script>
-import {MuttWidgetProxy, MethodProxy} from '../utils'
+import WidgetMixin from '../mixins/WidgetMixin'
 
-export default Object.assign({}, MuttWidgetProxy, {
+export default {
     name: 'mutt-radio',
+    mixins: [
+        WidgetMixin,
+    ],
     created() {
         // Booleans do not have choices, so we must contrive
         // them if they aren't already set
@@ -50,14 +53,15 @@ export default Object.assign({}, MuttWidgetProxy, {
                 this.field.choices = this.field.options.choices
             } else {
                 this.field.choices = [
-                    [true, 'Yes'],
-                    [false, 'No'],
+                    [
+                        true, 'Yes'
+                    ],
+                    [
+                        false, 'No'
+                    ],
                 ]
             }
         }
-
-        this.value = this.field.value
-        this.field.widget = this
 
         // Copy this prop as we may need to alter/overide it
         this.displayReadonly = this.readonly
@@ -66,9 +70,15 @@ export default Object.assign({}, MuttWidgetProxy, {
             this.displayReadonly = this.field.options.readonly
         }
     },
-    methods: Object.assign({}, MethodProxy, {
+    methods: {
         getFieldClass() {
-            return 'mutt-field mutt-field-radio radio'
+            let className = 'mutt-field mutt-field-radio'
+
+            if (this.field.attribs && this.field.attribs.hasOwnProperty('class')) {
+                className = `${className} ${this.field.attribs.class}`
+            }
+
+            return className
         },
 
         select(choice, label) {
@@ -93,6 +103,6 @@ export default Object.assign({}, MuttWidgetProxy, {
                 })
             }
         },
-    }),
-})
+    },
+}
 </script>

@@ -27,25 +27,31 @@
 </template>
 
 <script>
-import {MuttWidgetProxy, MethodProxy, ComputedProxy} from '../utils'
+import WidgetMixin from '../mixins/WidgetMixin'
 
-export default Object.assign({}, MuttWidgetProxy, {
+export default {
     name: 'mutt-textarea',
-    methods: Object.assign({}, MethodProxy, {
+    methods: {
         getFieldClass() {
-            return 'mutt-field mutt-field-text textarea'
+            let className = 'mutt-field mutt-field-textarea'
+
+            if (this.field.attribs && this.field.attribs.hasOwnProperty('class')) {
+                className = `${className} ${this.field.attribs.class}`
+            }
+
+            return className
         },
         focus() {
             this.$nextTick(() => {
                 this.$refs.textarea.focus()
             })
         },
-    }),
-    computed: Object.assign({}, ComputedProxy, {
+    },
+    computed: {
         describedBy() {
             let help = `${this.getFieldId()}-help`
             return this.field.options.hasOwnProperty('help') ? help : null
         },
-    }),
-})
+    },
+}
 </script>

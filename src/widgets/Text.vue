@@ -30,20 +30,29 @@
 </template>
 
 <script>
-import {MuttWidgetProxy, MethodProxy} from '../utils'
+import WidgetMixin from '../mixins/WidgetMixin'
 
-export default Object.assign({}, MuttWidgetProxy, {
+export default {
     name: 'mutt-text',
     alternative: 'string',
-    methods: Object.assign({}, MethodProxy, {
+    mixins: [
+        WidgetMixin,
+    ],
+    methods: {
         getFieldClass() {
-            return 'mutt-field mutt-field-text input'
+            let className = 'mutt-field mutt-field-text input'
+
+            if (this.field.attribs && this.field.attribs.hasOwnProperty('class')) {
+                className = `${className} ${this.field.attribs.class}`
+            }
+
+            return className
         },
         focus() {
             this.$nextTick(() => {
                 this.$refs.text.focus()
             })
         },
-    }),
-})
+    },
+}
 </script>

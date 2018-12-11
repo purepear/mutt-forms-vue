@@ -1,6 +1,6 @@
 <template>
-    <div v-if="field" :class="getFieldClass()">
-        <fieldset>
+    <div v-if="field" :class="getFieldWrapperClass()">
+        <fieldset :class="getFieldClass()">
             <legend v-if="field.label">{{ field.label }}</legend>
             <mutt-widget
                 v-for="objectField of field.object"
@@ -13,17 +13,26 @@
 </template>
 
 <script>
-import {MuttWidgetProxy, MethodProxy} from '../utils'
+import WidgetMixin from '../mixins/WidgetMixin'
 
-export default Object.assign({}, MuttWidgetProxy, {
+export default {
     name: 'mutt-object',
-    methods: Object.assign({}, MethodProxy, {
+    mixins: [
+        WidgetMixin,
+    ],
+    methods: {
         getFieldClass() {
-            return 'mutt-field mutt-field-object'
+            let className = 'mutt-field mutt-field-object'
+
+            if (this.field.attribs && this.field.attribs.hasOwnProperty('class')) {
+                className = `${className} ${this.field.attribs.class}`
+            }
+
+            return className
         },
         bubble(payload) {
             this.$emit('callback', payload)
         },
-    }),
-})
+    }
+}
 </script>

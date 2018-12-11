@@ -42,11 +42,14 @@
 </template>
 
 <script>
-import {MuttWidgetProxy, MethodProxy} from '../utils'
+import WidgetMixin from '../mixins/WidgetMixin'
 
-export default Object.assign({}, MuttWidgetProxy, {
+export default {
     name: 'mutt-choice',
-    methods: Object.assign({}, MethodProxy, {
+    mixins: [
+        WidgetMixin,
+    ],
+    methods: {
         getDefaultSelect() {
             if (this.field.options.hasOwnProperty('defaultSelect')) {
                 return this.field.options.defaultSelect
@@ -54,7 +57,13 @@ export default Object.assign({}, MuttWidgetProxy, {
             return 'Please select one'
         },
         getFieldClass() {
-            return 'mutt-field mutt-field-choice'
+            let className = 'mutt-field mutt-field-choice'
+
+            if (this.field.attribs && this.field.attribs.hasOwnProperty('class')) {
+                className = `${className} ${this.field.attribs.class}`
+            }
+
+            return className
         },
         select() {
             if (this.field.validate()) {
@@ -74,13 +83,13 @@ export default Object.assign({}, MuttWidgetProxy, {
                 })
             }
         },
-    }),
+    },
     watch: {
         value(newVal, oldVal) {
             if (this.field.options.callback) {
                 this.field.options.callback(newVal, oldVal)
             }
         },
-    },
-})
+    }
+}
 </script>

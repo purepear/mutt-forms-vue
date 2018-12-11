@@ -19,6 +19,7 @@ import MuttChoice from './widgets/Select.vue'
 import MuttObject from './widgets/Object.vue'
 import MuttArray from './widgets/Array.vue'
 import MuttHidden from './widgets/Hidden.vue'
+import WidgetMixin from './mixins/WidgetMixin'
 
 import {
   PropsProxy,
@@ -185,6 +186,8 @@ export default {
 
         Vue.prototype.$mutt = Mutt
     },
+
+    mixin: WidgetMixin,
 
     utils: {
        PropsProxy,

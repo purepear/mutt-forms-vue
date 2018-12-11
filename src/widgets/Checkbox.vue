@@ -29,23 +29,32 @@
 </template>
 
 <script>
-import {MuttWidgetProxy, ComputedProxy, MethodProxy} from '../utils'
+import WidgetMixin from '../mixins/WidgetMixin'
 
-export default Object.assign({}, MuttWidgetProxy, {
+export default {
     name: 'mutt-checkbox',
     for: 'boolean',
-    computed: Object.assign({}, ComputedProxy, {
+    mixins: [
+        WidgetMixin,
+    ],
+    computed: {
         getLabelClass() {
             return {
                 'mutt-label': true,
                 'mutt-field-checkbox-checked': this.value,
             }
         },
-    }),
-    methods: Object.assign({}, MethodProxy, {
+    },
+    methods: {
         getFieldClass() {
-            return 'mutt-field mutt-field-checkbox checkbox'
+            let className = 'mutt-field mutt-field-checkbox'
+
+            if (this.field.attribs && this.field.attribs.hasOwnProperty('class')) {
+                className = `${className} ${this.field.attribs.class}`
+            }
+
+            return className
         },
-    }),
-})
+    },
+}
 </script>

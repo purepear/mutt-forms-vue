@@ -138,7 +138,8 @@ export default {
                 fields: {
                     textField: {
                         label: 'Text Field',
-                        required: true
+                        required: true,
+                        wrapperClass: 'testing-wrapper-class'
                     },
                     textField1: {
                         label: 'Text Field 1',

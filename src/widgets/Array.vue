@@ -13,21 +13,37 @@
             v-bind:field="field"
             v-bind:errors="errors"
             v-bind:errorClass="getErrorClass()"></error-widget>
+        <div v-if="arrayControls">
+
+        </div>
     </div>
 </template>
 
 <script>
-import {MuttWidgetProxy, MethodProxy} from '../utils'
+import WidgetMixin from '../mixins/WidgetMixin'
 
-export default Object.assign({}, MuttWidgetProxy, {
+export default {
     name: 'mutt-array',
-    methods: Object.assign({}, MethodProxy, {
+    mixins: [
+        WidgetMixin,
+    ],
+    methods: {
         getFieldClass(slotIndex) {
-            return `mutt-field-array-item mutt-field-array-item-${slotIndex}`
+            let className = `mutt-field-array-item mutt-field-array-item-${slotIndex}`
+
+            if (this.field.attribs && this.field.attribs.hasOwnProperty('class')) {
+                className = `${className} ${this.field.attribs.class}`
+            }
+
+            return className
+        },
+        getFieldWrapperClass() {
+            const klass = this._getFieldWrapperClass()
+            return `${klass} mutt-field-array-wrapper`
         },
         bubble(payload) {
             this.$emit('callback', payload)
         },
-    }),
-})
+    },
+}
 </script>

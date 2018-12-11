@@ -9,14 +9,24 @@
 </template>
 
 <script>
-import {MuttWidgetProxy, MethodProxy} from '../utils'
+import WidgetMixin from '../mixins/WidgetMixin'
 
-export default Object.assign({}, MuttWidgetProxy, {
+export default {
     name: 'mutt-hidden',
-    methods: Object.assign({}, MethodProxy, {
+    mixins: [
+        WidgetMixin,
+    ],
+    methods: {
         getFieldClass() {
-            return 'mutt-field mutt-field-hidden'
+            let className = 'mutt-field mutt-field-hidden'
+
+            if (this.field.attribs &&
+                    this.field.attribs.hasOwnProperty('class')) {
+                className = `${className} ${this.field.attribs.class}`
+            }
+
+            return className
         },
-    }),
-})
+    },
+}
 </script>

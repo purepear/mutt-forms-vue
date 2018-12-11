@@ -1,5 +1,7 @@
 /**
-* Utilities
+*
+* DEPRECIATED - DO NOT USE - SEE WIDGETMIXIN AS AN ALTERNATIVE
+*
 */
 
 'use strict'
