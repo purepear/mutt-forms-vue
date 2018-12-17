@@ -9,7 +9,7 @@
     "demo": "cross-env NODE_ENV=development webpack-dev-server --hot"
   },
   "dependencies": {
-    "mutt-forms": "^1.9.2",
+    "mutt-forms": "^1.12.0",
     "vue": "^2.5.17"
   },
   "devDependencies": {

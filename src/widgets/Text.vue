@@ -38,6 +38,11 @@ export default {
     mixins: [
         WidgetMixin,
     ],
+    data() {
+        return {
+            value: '',
+        }
+    },
     methods: {
         getFieldClass() {
             let className = 'mutt-field mutt-field-text input'

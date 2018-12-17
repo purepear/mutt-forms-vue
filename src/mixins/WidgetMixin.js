@@ -31,9 +31,8 @@ export default {
         }
     },
     created() {
-        // TODO: Remove once mutt field/widget link fixed
-        this.value = this.field.value
         this.field.widget = this
+        this.init()
     },
     computed: {
         isReadOnly() {
@@ -54,6 +53,10 @@ export default {
         },
     },
     methods: {
+        init() {
+            this.value = this.field.value
+        },
+
         getValue() {
             return this.value
         },
