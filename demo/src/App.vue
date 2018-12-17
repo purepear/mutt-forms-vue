@@ -6,7 +6,6 @@
           <mutt-vue
               v-bind:schema="schema"
               v-bind:options="options"
-              v-bind:data="data"
               v-bind:readonly="readonly"
               v-on:init="setForm"
               v-on:callback="callbackPrinter"
@@ -58,6 +57,7 @@ export default {
     },
     mounted() {
         debugger
+        this.form.populate(this.data)
     },
     data() {
         return {
@@ -202,7 +202,7 @@ export default {
                 }
             },
             data: {
-                textField: 'Testing 123',
+                textField: 'Testing 1234',
                 textareaField: 'Testing some more!',
                 objectField: {
                     firstName: 'Test first name!',

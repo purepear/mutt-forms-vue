@@ -31,8 +31,8 @@ export default {
         }
     },
     created() {
-        this.field.widget = this
         this.init()
+        this.field.widget = this
     },
     computed: {
         isReadOnly() {
