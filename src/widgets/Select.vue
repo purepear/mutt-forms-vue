@@ -25,7 +25,7 @@
         <option
           v-for="(option, index) in field.choices"
           :value="option[0]">
-          {{ option[1] }}
+          {{ _(option[1]) }}
         </option>
       </select>
     </div>
@@ -49,6 +49,8 @@ export default {
     WidgetMixin,
   ],
   methods: {
+    _,  // i18n
+
     getDefaultSelect() {
       if (this.field.options.hasOwnProperty('defaultSelect')) {
         return this.field.options.defaultSelect

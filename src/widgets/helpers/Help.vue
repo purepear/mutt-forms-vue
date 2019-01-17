@@ -16,7 +16,7 @@ export default {
   ],
   computed: {
     getHelp() {
-      return _(this, field.options.help)
+      return _(this, this.field.options.help)
     },
   },
   methods: {
