@@ -1,61 +1,71 @@
 <template>
-    <form v-if="form" role="form" v-on:submit.prevent>
-        <fieldset v-for="fieldset of form.fieldsets">
-            <legend v-if="fieldset.label">{{ fieldset.label }}</legend>
-            <mutt-widget
-                v-for="field of fieldset.fields"
-                v-bind:key="field.id"
-                v-bind:field="field"
-                v-bind:readonly="readonly"
-                v-on:callback="callback"></mutt-widget>
-            <button v-on:click="submit">Submit</button>
-        </fieldset>
-    </form>
+  <form v-if="form" role="form" v-on:submit.prevent>
+    <fieldset v-for="fieldset of form.fieldsets">
+      <legend v-if="fieldset.label">{{ getFieldsetLegend(fieldset) }}</legend>
+      <mutt-widget
+        v-for="field of fieldset.fields"
+        v-bind:key="field.id"
+        v-bind:field="field"
+        v-bind:readonly="readonly"
+        v-on:callback="callback"></mutt-widget>
+      <button v-on:click="submit">{{ getSubmitCta }}</button>
+    </fieldset>
+  </form>
 </template>
 
 <script>
+import { i18n as _ } from './lib/i18n'
+
 export default {
-    name: 'mutt-vue',
-    props: {
-        schema: {
-            type: Object,
-            required: true,
-        },
-        options: {
-            type: Object,
-        },
-        data: {
-            type: Object,
-        },
-        readonly: {
-            type: Boolean,
-            default: false,
-        },
+  name: 'mutt-vue',
+  props: {
+    schema: {
+      type: Object,
+      required: true,
     },
-    created() {
-        this.form = new this.$mutt(
-            this.schema,
-            this.options
-        )
-        this.$emit('init', this.form)
+    options: {
+      type: Object,
     },
-    mounted() {
-        if (this.data) {
-            this.form.populate(this.data)
-        }
+    data: {
+      type: Object,
     },
-    data() {
-        return {
-            form: null,
-        }
+    readonly: {
+      type: Boolean,
+      default: false,
     },
-    methods: {
-        callback(payload) {
-            this.$emit('callback', payload)
-        },
-        submit() {
-            this.$emit('submit', this.form)
-        },
+  },
+  created() {
+    this.form = new this.$mutt(
+      this.schema,
+      this.options
+    )
+    this.$emit('init', this.form)
+  },
+  mounted() {
+    if (this.data) {
+      this.form.populate(this.data)
+    }
+  },
+  data() {
+    return {
+      form: null,
+    }
+  },
+  computed: {
+    getSubmitCta() {
+      return _(this, 'Submit')
     },
+  },
+  methods: {
+    getLegend(fieldset) {
+      return _(this, fieldset.label)
+    },
+    callback(payload) {
+      this.$emit('callback', payload)
+    },
+    submit() {
+      this.$emit('submit', this.form)
+    },
+  },
 }
 </script>

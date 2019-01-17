@@ -27,10 +27,10 @@ export default {
     vue(),
     babel(),
     uglify({
-        mangle: false,
-        keep_classnames: true,
-        keep_fnames: true,
-        safari10: true,
+      mangle: false,
+      keep_classnames: true,
+      keep_fnames: true,
+      safari10: true,
     }),
   ],
   external: [
