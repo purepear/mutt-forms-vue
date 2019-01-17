@@ -13,7 +13,7 @@
       v-bind:field="field"
       v-bind:errors="errors"
       v-bind:errorClass="getErrorClass()"></error-widget>
-    <div v-if="arrayControls">
+    <div v-if="hasArrayControls">
       <button v-on:click.prevent="appendFieldSlot">+</button>
       <button v-on:click.prevent="removeFieldSlot">-</button>
     </div>
@@ -28,6 +28,15 @@ export default {
   mixins: [
     WidgetMixin,
   ],
+  computed: {
+    hasArrayControls() {
+      if (this.field.options.hasOwnProperty('arrayControls') &&
+          this.field.options.arrayControls) {
+        return true
+      }
+      return false
+    },
+  },
   methods: {
     // Here for completeness, the array field currently
     // expects these to be here if its asked to propogate

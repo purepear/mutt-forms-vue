@@ -172,7 +172,8 @@ export default {
                     },
                     arrayField: {
                         label: 'Array Field',
-                        format: 'list'
+                        format: 'list',
+                        arrayControls: true
                     },
                     objectField: {
                         label: 'Object Field',

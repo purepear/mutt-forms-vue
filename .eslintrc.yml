@@ -5,3 +5,4 @@ plugins:
   - html
 rules:
   semi: off
+  object-curly-spacing: off

@@ -12,7 +12,7 @@ export default {
   name: 'label-widget',
   props: [
     'field',
-    'fieldId'
+    'fieldId',
   ],
   computed: {
     showLabel() {

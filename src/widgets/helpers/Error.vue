@@ -21,7 +21,7 @@ export default {
   computed: {
     getError() {
       return _(this, error)
-    }
+    },
   },
 }
 </script>
