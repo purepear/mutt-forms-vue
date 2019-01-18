@@ -49,7 +49,7 @@ export default {
     WidgetMixin,
   ],
   methods: {
-    _,  // i18n
+    _, // i18n
 
     getDefaultSelect() {
       if (this.field.options.hasOwnProperty('defaultSelect')) {
