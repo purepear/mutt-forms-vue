@@ -50,6 +50,7 @@ export default {
             console.log('Widget Callback: ', JSON.stringify(payload, null, 2))
         },
         submit() {
+            this.form.validate()
             let data = this.form.data()
             this.submission = JSON.stringify(data, null, 2)
             console.log('SUBMITTED ', this.submission)
