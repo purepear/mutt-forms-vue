@@ -25,7 +25,7 @@
         <option
           v-for="(option, index) in field.choices"
           :value="option[0]">
-          {{ _(option[1]) }}
+          {{ getOption(option[1]) }}
         </option>
       </select>
     </div>
@@ -56,6 +56,9 @@ export default {
         return this.field.options.defaultSelect
       }
       return _(this, 'Please select one')
+    },
+    getOption(option) {
+      return _(this, option)
     },
     getFieldClass() {
       let className = 'mutt-field mutt-field-choice'
