@@ -156,7 +156,12 @@ export default {
                         label: 'Checkbox Field'
                     },
                     choiceField: {
-                        label: 'Choice Field'
+                        label: 'Choice Field',
+                        widget: 'choice',
+                        choices: [
+                          ['FIRST', 'First'],
+                          ['SECOND', 'Second']
+                        ]
                     },
                     radioField: {
                         label: 'Radio Field',

@@ -24,8 +24,9 @@
         </option>
         <option
           v-for="(option, index) in field.choices"
+          v-bind:key="`option-${option[0]}`"
           :value="option[0]">
-          {{ _(option[1]) }}
+          {{ getOption(option) }}
         </option>
       </select>
     </div>
@@ -49,8 +50,9 @@ export default {
     WidgetMixin,
   ],
   methods: {
-    _, // i18n
-
+    getOption(option) {
+      return _(this, option[1])
+    },
     getDefaultSelect() {
       if (this.field.options.hasOwnProperty('defaultSelect')) {
         return this.field.options.defaultSelect

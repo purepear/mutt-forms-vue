@@ -9,6 +9,7 @@
     <div
       v-if="!isReadOnly"
       v-for="(choice, index) of field.choices"
+      v-bind:key="`radio-${choice[0]}`"
       class="mutt-field-radio-item">
       <input
         type="radio"
