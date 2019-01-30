@@ -59,6 +59,9 @@ export default {
       }
       return _(this, 'Please select one')
     },
+    getOption(option) {
+      return _(this, option)
+    },
     getFieldClass() {
       let className = 'mutt-field mutt-field-choice'
 

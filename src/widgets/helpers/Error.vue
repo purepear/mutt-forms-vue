@@ -3,7 +3,7 @@
     v-if="errors && errors.length > 0"
     :class="errorClass">
     <li v-for="error of errors" role="alert">
-      {{ getError }}
+      {{ getError(error) }}
     </li>
   </ul>
 </template>
@@ -18,9 +18,9 @@ export default {
     'errorClass',
     'field',
   ],
-  computed: {
-    getError() {
-      return _(this, this.error)
+  methods: {
+    getError(error) {
+      return _(this, error)
     },
   },
 }
