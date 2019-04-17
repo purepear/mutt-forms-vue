@@ -13,7 +13,7 @@
       v-bind:field="field"
       v-bind:errors="errors"
       v-bind:errorClass="getErrorClass()"></error-widget>
-    <div v-if="hasArrayControls">
+    <div v-if="hasArrayControls && !readonly">
       <button v-on:click.prevent="appendFieldSlot">+</button>
       <button v-on:click.prevent="removeFieldSlot">-</button>
     </div>
