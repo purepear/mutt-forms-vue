@@ -18,7 +18,8 @@
       :aria-invalid="hasErrors ? 'true' : null"
       :aria-describedby="field.options.hasOwnProperty('help') ? `${getFieldId()}-help` : null"
       v-on:keypress.enter.prevent="submitCallback"
-      v-model="value">
+      v-bind:value="value"
+      v-on:input="value = $event.target.value">
     <help-widget
       v-bind:field="field"></help-widget>
     <error-widget
