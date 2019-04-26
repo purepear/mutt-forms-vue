@@ -6,6 +6,11 @@
     <readonly-widget
       v-if="isReadOnly"
       v-bind:value="field.value"></readonly-widget>
+    <!--
+      v-model not used in the input here because of a known issue with
+      user interaction and the default Android Chrome keyboard.
+      https://github.com/vuejs/vue/issues/9777
+    -->
     <input
       v-if="!isReadOnly"
       ref="text"
@@ -18,7 +23,8 @@
       :aria-invalid="hasErrors ? 'true' : null"
       :aria-describedby="field.options.hasOwnProperty('help') ? `${getFieldId()}-help` : null"
       v-on:keypress.enter.prevent="submitCallback"
-      v-model="value">
+      v-bind:value="value"
+      v-on:input="value = $event.target.value">
     <help-widget
       v-bind:field="field"></help-widget>
     <error-widget
