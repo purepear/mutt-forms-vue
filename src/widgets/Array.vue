@@ -7,12 +7,17 @@
         v-bind:key="slotField.id"
         v-bind:field="slotField"
         v-bind:readonly="readonly"
-        v-on:callback="bubble"></mutt-widget>
+        v-on:callback="bubble" />
+      <button
+        v-if="hasSlotControls && !readonly"
+        v-on:click.prevent="removeFieldSlotAtIndex(slotIndex)">
+        Remove
+      </button>
     </div>
     <error-widget
       v-bind:field="field"
       v-bind:errors="errors"
-      v-bind:errorClass="getErrorClass()"></error-widget>
+      v-bind:errorClass="getErrorClass()" />
     <div v-if="hasArrayControls && !readonly">
       <button v-on:click.prevent="appendFieldSlot">+</button>
       <button v-on:click.prevent="removeFieldSlot">-</button>
@@ -36,6 +41,14 @@ export default {
       }
       return false
     },
+
+    hasSlotControls() {
+      if (this.field.options.hasOwnProperty('slotControls') &&
+          this.field.options.arrayControls) {
+        return true
+      }
+      return false
+    },
   },
   methods: {
     // Here for completeness, the array field currently
@@ -54,6 +67,11 @@ export default {
       // it will become and infinite loop
       this.field.removeSlot(false)
     },
+
+    removeFieldSlotAtIndex(index) {
+      this.field.spliceSlot(index, false)
+    },
+
     getFieldClass(slotIndex) {
       const slot = `mutt-field-array-item-${slotIndex}`
       let className = `mutt-field-array-item ${slot}`
