@@ -10,7 +10,7 @@
         v-on:callback="bubble" />
       <button
         v-if="hasSlotControls && !readonly"
-        v-on:click.prevent="removeFieldSlotAtIndex(slotIndex)">
+        v-on:click.prevent="removeFieldSlot(slotIndex)">
         Remove
       </button>
     </div>
@@ -20,7 +20,7 @@
       v-bind:errorClass="getErrorClass()" />
     <div v-if="hasArrayControls && !readonly">
       <button v-on:click.prevent="appendFieldSlot">+</button>
-      <button v-on:click.prevent="removeFieldSlot">-</button>
+      <button v-on:click.prevent="removeFieldSlot()">-</button>
     </div>
   </div>
 </template>
@@ -35,19 +35,13 @@ export default {
   ],
   computed: {
     hasArrayControls() {
-      if (this.field.options.hasOwnProperty('arrayControls') &&
-          this.field.options.arrayControls) {
-        return true
-      }
-      return false
+      return this.field.options.hasOwnProperty('arrayControls') &&
+          this.field.options.arrayControls
     },
 
     hasSlotControls() {
-      if (this.field.options.hasOwnProperty('slotControls') &&
-          this.field.options.arrayControls) {
-        return true
-      }
-      return false
+      return this.field.options.hasOwnProperty('slotControls') &&
+          this.field.options.slotControls
     },
   },
   methods: {
@@ -61,15 +55,35 @@ export default {
       // Note: Need to be careful with names, if we use addSlot
       // it will become and infinite loop
       this.field.addSlot(false)
+
+      const newSlotIndex = this.field.slots.length - 1
+
+      this.$emit('callback', {
+        key: this.field.name,
+        value: this.field.value,
+        action: 'arraySlotAppended',
+        slot: this.field.slots[newSlotIndex],
+        slotIndex: newSlotIndex,
+      })
     },
-    removeFieldSlot() {
+    removeFieldSlot(slotIndex) {
       // Note: Need to be careful with names, if we use addSlot
       // it will become and infinite loop
-      this.field.removeSlot(false)
-    },
 
-    removeFieldSlotAtIndex(index) {
-      this.field.spliceSlot(index, false)
+      const slotIndexToRemove =
+        typeof slotIndex === 'undefined'
+        ? this.field.slots.length - 1
+        : slotIndex
+      const slot = this.field.slots[slotIndexToRemove]
+
+      this.field.spliceSlot(slotIndexToRemove, false)
+
+      this.$emit('callback', {
+        key: this.field.name,
+        value: this.field.value,
+        action: 'arraySlotRemoved',
+        slot,
+      })
     },
 
     getFieldClass(slotIndex) {

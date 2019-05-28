@@ -47,7 +47,7 @@ export default {
             this.readonly = !this.readonly
         },
         callbackPrinter(payload) {
-            console.log('Widget Callback: ', JSON.stringify(payload, null, 2))
+            console.log('Widget Callback: ', payload)
         },
         submit() {
             this.form.validate()
@@ -57,7 +57,6 @@ export default {
         }
     },
     mounted() {
-        debugger
         this.form.populate(this.data)
     },
     data() {
@@ -196,6 +195,8 @@ export default {
                         }
                     },
                     arrayObjField: {
+                        arrayControls: true,
+                        slotControls: true,
                         format: {
                             list: true,
                             item: {
