@@ -9,7 +9,7 @@
         v-bind:readonly="readonly"
         v-on:callback="bubble" />
       <button
-        v-if="hasSlotControls && !readonly"
+        v-if="hasSlotControls && allowedSlotControls && !readonly"
         v-on:click.prevent="removeFieldSlot(slotIndex)">
         Remove
       </button>
@@ -33,6 +33,13 @@ export default {
   mixins: [
     WidgetMixin,
   ],
+  data() {
+    return {
+      // Simple item types cannot have slot controls due to an issue with the
+      //  value not updating correctly when slots are removed.
+      itemTypesAllowedSlotControls: ['object'],
+    }
+  },
   computed: {
     hasArrayControls() {
       return this.field.options.hasOwnProperty('arrayControls') &&
@@ -42,6 +49,17 @@ export default {
     hasSlotControls() {
       return this.field.options.hasOwnProperty('slotControls') &&
           this.field.options.slotControls
+    },
+
+    /**
+     * Returns whether the item type is in the list of types which are allowed
+     * to use slot controls.
+     *
+     * @return {boolean} whether the type is allowed slot controls
+     */
+    allowedSlotControls() {
+      return this.itemTypesAllowedSlotControls
+        .includes(this.field.itemSchema.type)
     },
   },
   methods: {
