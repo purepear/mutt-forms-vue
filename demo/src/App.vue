@@ -223,20 +223,20 @@ export default {
                 ],
                 arrayObjField: [
                     {
-                        firstName: 'FIRST NAME',
-                        lastName: 'LAST NAME'
+                        firstName: 'First Name 1',
+                        lastName: 'Last Name 1'
                     },
                     {
-                        firstName: 'SECOND FIRST NAME',
-                        lastName: 'THIRD LAST NAME'
+                        firstName: 'First Name 2',
+                        lastName: 'Last Name 2'
                     },
                     {
-                        firstName: 'FORTH FIRST NAME',
-                        lastName: 'FORTH LAST NAME'
+                        firstName: 'First Name 3',
+                        lastName: 'Last Name 3'
                     },
                     {
-                        firstName: 'ANOTHER FIRST NAME',
-                        lastName: 'ANOTHER LAST NAME'
+                        firstName: 'First Name 4',
+                        lastName: 'Last Name 4'
                     }
                 ]
             }
