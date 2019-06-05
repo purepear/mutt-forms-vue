@@ -1,12 +1,13 @@
 {
   "name": "mutt-forms-vue",
   "description": "Mutt forms - VueJS integration",
-  "version": "1.7.8",
+  "version": "1.8.0",
   "author": "Bought By Many <dev@boughtbymany.com>",
   "license": "MIT",
   "main": "src/main.js",
   "module": "dist/mutt-forms-vue.es.js",
-  "contributors": [{
+  "contributors": [
+    {
       "name": "Jack Prior",
       "email": "jack@boughtbymany.com"
     },
