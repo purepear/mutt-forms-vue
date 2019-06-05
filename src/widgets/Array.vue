@@ -7,15 +7,20 @@
         v-bind:key="slotField.id"
         v-bind:field="slotField"
         v-bind:readonly="readonly"
-        v-on:callback="bubble"></mutt-widget>
+        v-on:callback="bubble" />
+      <button
+        v-if="hasSlotControls && allowedSlotControls && !readonly"
+        v-on:click.prevent="removeFieldSlot(slotIndex)">
+        Remove
+      </button>
     </div>
     <error-widget
       v-bind:field="field"
       v-bind:errors="errors"
-      v-bind:errorClass="getErrorClass()"></error-widget>
+      v-bind:errorClass="getErrorClass()" />
     <div v-if="hasArrayControls && !readonly">
       <button v-on:click.prevent="appendFieldSlot">+</button>
-      <button v-on:click.prevent="removeFieldSlot">-</button>
+      <button v-on:click.prevent="removeFieldSlot()">-</button>
     </div>
   </div>
 </template>
@@ -28,13 +33,33 @@ export default {
   mixins: [
     WidgetMixin,
   ],
+  data() {
+    return {
+      // Simple item types cannot have slot controls due to an issue with the
+      //  value not updating correctly when slots are removed.
+      itemTypesAllowedSlotControls: ['object'],
+    }
+  },
   computed: {
     hasArrayControls() {
-      if (this.field.options.hasOwnProperty('arrayControls') &&
-          this.field.options.arrayControls) {
-        return true
-      }
-      return false
+      return this.field.options.hasOwnProperty('arrayControls') &&
+          this.field.options.arrayControls
+    },
+
+    hasSlotControls() {
+      return this.field.options.hasOwnProperty('slotControls') &&
+          this.field.options.slotControls
+    },
+
+    /**
+     * Returns whether the item type is in the list of types which are allowed
+     * to use slot controls.
+     *
+     * @return {boolean} whether the type is allowed slot controls
+     */
+    allowedSlotControls() {
+      return this.itemTypesAllowedSlotControls
+        .includes(this.field.itemSchema.type)
     },
   },
   methods: {
@@ -48,12 +73,37 @@ export default {
       // Note: Need to be careful with names, if we use addSlot
       // it will become and infinite loop
       this.field.addSlot(false)
+
+      const newSlotIndex = this.field.slots.length - 1
+
+      this.$emit('callback', {
+        key: this.field.name,
+        value: this.field.value,
+        action: 'arraySlotAppended',
+        slot: this.field.slots[newSlotIndex],
+        slotIndex: newSlotIndex,
+      })
     },
-    removeFieldSlot() {
+    removeFieldSlot(slotIndex) {
       // Note: Need to be careful with names, if we use addSlot
       // it will become and infinite loop
-      this.field.removeSlot(false)
+
+      const slotIndexToRemove =
+        typeof slotIndex === 'undefined'
+        ? this.field.slots.length - 1
+        : slotIndex
+      const slot = this.field.slots[slotIndexToRemove]
+
+      this.field.spliceSlot(slotIndexToRemove, false)
+
+      this.$emit('callback', {
+        key: this.field.name,
+        value: this.field.value,
+        action: 'arraySlotRemoved',
+        slot,
+      })
     },
+
     getFieldClass(slotIndex) {
       const slot = `mutt-field-array-item-${slotIndex}`
       let className = `mutt-field-array-item ${slot}`

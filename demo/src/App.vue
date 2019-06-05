@@ -47,7 +47,7 @@ export default {
             this.readonly = !this.readonly
         },
         callbackPrinter(payload) {
-            console.log('Widget Callback: ', JSON.stringify(payload, null, 2))
+            console.log('Widget Callback: ', payload)
         },
         submit() {
             this.form.validate()
@@ -57,7 +57,6 @@ export default {
         }
     },
     mounted() {
-        debugger
         this.form.populate(this.data)
     },
     data() {
@@ -179,7 +178,8 @@ export default {
                     arrayField: {
                         label: 'Array Field',
                         format: 'list',
-                        arrayControls: true
+                        arrayControls: true,
+                        slotControls: true
                     },
                     objectField: {
                         label: 'Object Field',
@@ -195,6 +195,8 @@ export default {
                         }
                     },
                     arrayObjField: {
+                        arrayControls: true,
+                        slotControls: true,
                         format: {
                             list: true,
                             item: {
@@ -221,20 +223,20 @@ export default {
                 ],
                 arrayObjField: [
                     {
-                        firstName: 'FIRST NAME',
-                        lastName: 'LAST NAME'
+                        firstName: 'First Name 1',
+                        lastName: 'Last Name 1'
                     },
                     {
-                        firstName: 'SECOND FIRST NAME',
-                        lastName: 'THIRD LAST NAME'
+                        firstName: 'First Name 2',
+                        lastName: 'Last Name 2'
                     },
                     {
-                        firstName: 'FORTH FIRST NAME',
-                        lastName: 'FORTH LAST NAME'
+                        firstName: 'First Name 3',
+                        lastName: 'Last Name 3'
                     },
                     {
-                        firstName: 'ANOTHER FIRST NAME',
-                        lastName: 'ANOTHER LAST NAME'
+                        firstName: 'First Name 4',
+                        lastName: 'Last Name 4'
                     }
                 ]
             }
