@@ -1,5 +1,5 @@
 {
-  "name": "mutt-forms-vue",
+  "name": "@mutt/widgets-vue",
   "description": "Mutt forms - VueJS integration",
   "version": "1.8.0",
   "author": "Bought By Many <dev@boughtbymany.com>",
@@ -41,7 +41,7 @@
   ],
   "dependencies": {},
   "peerDependencies": {
-    "mutt-forms": ">= 1.9.2 < 2",
+    "@mutt/forms": "^2.0.0",
     "vue": "^2.5.x"
   },
   "devDependencies": {

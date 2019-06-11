@@ -16,7 +16,7 @@ export default {
       exports: 'default',
       name: 'MuttVue',
       globals: {
-        'mutt-forms': 'Mutt',
+        '@mutt/forms': 'Mutt',
         'vue': 'Vue',
       },
     },
@@ -35,6 +35,6 @@ export default {
   ],
   external: [
     'vue',
-    'mutt-forms',
+    '@mutt/forms',
   ]
 }

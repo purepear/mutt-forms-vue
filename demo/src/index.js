@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-import MuttVue from 'mutt-forms-vue'
+import MuttVue from '@mutt/widgets-vue'
 import App from './App.vue'
 
 Vue.use(VueI18n)
