@@ -44,8 +44,8 @@ module.exports = {
       // it may not be found in the node_modules in the mutt-forms-vue build. so we must make
       // sure we pull it out of the app, which has Mutt set as a dependancy.
       // 'mutt-forms$': 'mutt-forms/dist/mutt-forms.es.js',
-      'mutt-forms$': resolve('node_modules/mutt-forms/dist/mutt-forms.es.js'),
-      'mutt-forms-vue$': resolve('../dist/mutt-forms-vue.es.js'),
+      '@mutt/forms$': resolve('node_modules/@mutt/forms/dist/mutt-forms.es.js'),
+      '@mutt/widgets-vue$': resolve('../dist/mutt-forms-vue.es.js'),
     }
   },
   devServer: {
