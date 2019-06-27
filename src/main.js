@@ -5,7 +5,7 @@
 
 'use strict'
 
-import Mutt from 'mutt-forms'
+import Mutt from '@mutt/forms'
 
 // Widgets
 import MuttVue from './Form.vue'
