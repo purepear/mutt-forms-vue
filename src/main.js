@@ -19,6 +19,7 @@ import MuttChoice from './widgets/Select.vue'
 import MuttObject from './widgets/Object.vue'
 import MuttArray from './widgets/Array.vue'
 import MuttHidden from './widgets/Hidden.vue'
+import MuttPassword from './widgets/Password.vue'
 import WidgetMixin from './mixins/WidgetMixin'
 
 import {
@@ -61,6 +62,7 @@ export default {
       MuttArray,
       MuttRadio,
       MuttHidden,
+      MuttPassword,
     }
 
     // We may in future want to extend the component list
