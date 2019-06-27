@@ -55,7 +55,7 @@ export default {
     },
     focus() {
       this.$nextTick(() => {
-        this.$refs.text.focus()
+        this.$refs.password.focus()
       })
     },
   },
