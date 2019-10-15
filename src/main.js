@@ -112,7 +112,6 @@ export default {
     Vue.component('mutt-widget', {
       render(h) {
         return h(this.getWidget(), {
-          tag: 'component',
           attrs: {
             field: this.field,
             fieldIndex: this.fieldIndex,
