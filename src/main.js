@@ -110,15 +110,19 @@ export default {
 
     // Register the binding widget
     Vue.component('mutt-widget', {
-      template: `
-        <component
-            @callback="callback"
-            :is="getWidget()"
-            v-bind:field="field"
-            v-bind:fieldIndex="fieldIndex"
-            v-bind:readonly="readonly"
-            ></component>
-      `,
+      render(h) {
+        return h(this.getWidget(), {
+          tag: 'component',
+          attrs: {
+            field: this.field,
+            fieldIndex: this.fieldIndex,
+            readonly: this.readonly,
+          },
+          on: {
+            callback: this.callback,
+          },
+        })
+      },
       props: [
         'field',
         'widget',
