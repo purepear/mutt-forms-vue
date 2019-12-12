@@ -27,7 +27,7 @@
     </div>
     <readonly-widget
       v-if="isReadOnly"
-      v-bind:value="field.value"></readonly-widget>
+      v-bind:value="readonlyLabel"></readonly-widget>
     <help-widget
       v-bind:field="field"></help-widget>
     <error-widget
@@ -39,14 +39,19 @@
 </template>
 
 <script>
-import WidgetMixin from '../mixins/WidgetMixin'
-import { i18n as _ } from '../lib/i18n'
+  import WidgetMixin from '../mixins/WidgetMixin'
+  import {i18n as _} from '../lib/i18n'
 
-export default {
+  export default {
   name: 'mutt-radio',
   mixins: [
     WidgetMixin,
   ],
+  computed: {
+    readonlyLabel() {
+      return this.label || field.value
+    },
+  },
   created() {
     // Booleans do not have choices, so we must contrive
     // them if they aren't already set
@@ -72,6 +77,11 @@ export default {
       this.displayReadonly = this.field.options.readonly
     }
   },
+  data() {
+    return {
+      label: null,
+    }
+  },
   methods: {
     getChoice(choice) {
       return _(this, choice)
@@ -90,6 +100,7 @@ export default {
 
     select(choice, label) {
       this.value = choice
+      this.label = label
 
       if (this.field.validate()) {
         this.$emit('callback', {
