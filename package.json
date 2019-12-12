@@ -1,7 +1,7 @@
 {
   "name": "@mutt/widgets-vue",
   "description": "Mutt forms - VueJS integration",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "author": "Bought By Many <dev@boughtbymany.com>",
   "license": "MIT",
   "main": "src/main.js",
