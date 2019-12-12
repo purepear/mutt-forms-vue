@@ -49,7 +49,7 @@
   ],
   computed: {
     readonlyLabel() {
-      return this.field.choices.find(choice => choice[0] === this.value)[1]
+      return this.field.choices.find((choice) => choice[0] === this.value)[1]
     },
   },
   created() {
