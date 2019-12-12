@@ -27,7 +27,7 @@
     </div>
     <readonly-widget
       v-if="isReadOnly"
-      v-bind:value="getReadonlyLabel()"></readonly-widget>
+      v-bind:value="readonlyLabel"></readonly-widget>
     <help-widget
       v-bind:field="field"></help-widget>
     <error-widget
@@ -47,6 +47,11 @@
   mixins: [
     WidgetMixin,
   ],
+  computed: {
+    readonlyLabel() {
+      return this.label || field.value
+    }
+  },
   created() {
     // Booleans do not have choices, so we must contrive
     // them if they aren't already set
@@ -115,10 +120,6 @@
           validated: false,
         })
       }
-    },
-
-    getReadonlyLabel() {
-      return this.label || field.value
     },
   },
 }
