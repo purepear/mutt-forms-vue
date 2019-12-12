@@ -50,7 +50,7 @@
   computed: {
     readonlyLabel() {
       return this.label || field.value
-    }
+    },
   },
   created() {
     // Booleans do not have choices, so we must contrive
