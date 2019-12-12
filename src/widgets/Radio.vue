@@ -49,7 +49,7 @@
   ],
   computed: {
     readonlyLabel() {
-      return this.label || field.value
+      return this.field.choices.find(choice => choice[0] === this.value)[1]
     },
   },
   created() {
@@ -77,11 +77,6 @@
       this.displayReadonly = this.field.options.readonly
     }
   },
-  data() {
-    return {
-      label: null,
-    }
-  },
   methods: {
     getChoice(choice) {
       return _(this, choice)
@@ -100,7 +95,6 @@
 
     select(choice, label) {
       this.value = choice
-      this.label = label
 
       if (this.field.validate()) {
         this.$emit('callback', {
