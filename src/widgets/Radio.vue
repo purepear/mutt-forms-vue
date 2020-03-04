@@ -20,6 +20,7 @@
         :aria-invalid="hasErrors ? 'true' : null"
         :aria-describedby="field.options.hasOwnProperty('help') ? `${getFieldId()}-help` : null"
         v-bind:value="choice[0]"
+        v-on:click="value === choice[0] && select(choice[0], choice[1])"
         v-on:change="select(choice[0], choice[1])">
       <label
         v-bind:for="`${field.id}-${choice[0]}`"
