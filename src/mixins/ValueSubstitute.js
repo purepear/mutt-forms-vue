@@ -31,9 +31,9 @@ export default {
       let result
       while ((result = regex.exec(string)) !== null) {
         let fieldName = result[1]
-        let defaultText = '';
+        let defaultText = ''
         if (fieldName.indexOf('|') > -1) {
-          let [_fieldName, _defaultText] = fieldName.split('|')
+          const [_fieldName, _defaultText] = fieldName.split('|')
           fieldName = _fieldName.trim()
           defaultText = _defaultText.trim()
         }
