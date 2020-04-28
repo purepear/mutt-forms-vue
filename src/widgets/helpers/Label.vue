@@ -7,7 +7,7 @@
 <script>
 import Formatters from '../../lib/formaters'
 import { i18n as _ } from '../../lib/i18n'
-import { ValueSubstituteMixin } from '@boughtbymany/mutt-forms-vue-naturallang'
+import ValueSubstituteMixin from '../../mixins/ValueSubstitute'
 
 export default {
   name: 'label-widget',

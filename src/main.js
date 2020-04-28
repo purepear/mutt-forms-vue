@@ -21,6 +21,7 @@ import MuttArray from './widgets/Array.vue'
 import MuttHidden from './widgets/Hidden.vue'
 import MuttPassword from './widgets/Password.vue'
 import WidgetMixin from './mixins/WidgetMixin'
+import ValueSubstituteMixin from './mixins/ValueSubstitute'
 
 import {
   PropsProxy,
@@ -205,3 +206,5 @@ export default {
     MuttWidgetProxy,
   },
 }
+
+export {ValueSubstituteMixin as ValueSubstituteMixin}

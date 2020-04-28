@@ -39,9 +39,7 @@
     "form",
     "mutt"
   ],
-  "dependencies": {
-    "@boughtbymany/mutt-forms-vue-naturallang": "^2.1.0"
-  },
+  "dependencies": {},
   "peerDependencies": {
     "@mutt/forms": "^2.0.0",
     "vue": "^2.5.x"
