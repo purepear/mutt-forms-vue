@@ -40,7 +40,10 @@ export default {
       // Run translation first to get translation value
       label = _(this, label)
 
-      // Substitute any strings with $[fieldName] with the respective fieldname value
+      /**
+       * Substitute any strings with $[fieldName] with
+       * the respective fieldname value
+       */
       label = this.substituteValues(label)
 
       return label
