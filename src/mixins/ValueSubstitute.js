@@ -1,9 +1,5 @@
 export default {
   methods: {
-    /**
-     * These methods are stolen directly from Vue-Naturallang
-     * TODO: make this use the same methods to cut down on duplication
-     */
     /*
      * Walk upwards until we can resolve a field name.
      */

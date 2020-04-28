@@ -207,4 +207,4 @@ export default {
   },
 }
 
-export {ValueSubstituteMixin as ValueSubstituteMixin}
+export { ValueSubstituteMixin }
