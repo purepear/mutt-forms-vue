@@ -7,6 +7,7 @@
 <script>
 import Formatters from '../../lib/formaters'
 import { i18n as _ } from '../../lib/i18n'
+import ValueSubstituteMixin from '../../mixins/ValueSubstitute'
 
 export default {
   name: 'label-widget',
@@ -14,6 +15,7 @@ export default {
     'field',
     'fieldId',
   ],
+  mixins: [ValueSubstituteMixin],
   computed: {
     showLabel() {
       if (this.field.options.hasOwnProperty('showLabel')) {
@@ -35,7 +37,16 @@ export default {
         )
       }
 
-      return _(this, label)
+      // Run translation first to get translation value
+      label = _(this, label)
+
+      /*
+       * Substitute any strings with $[fieldName] with
+       * the respective fieldname value
+       */
+      label = this.substituteValues(label)
+
+      return label
     },
   },
 }

@@ -13,7 +13,7 @@ export default {
     {
       file: 'dist/mutt-forms-vue.min.js',
       format: 'iife',
-      exports: 'default',
+      exports: ['default', 'ValueSubstituteMixin'],
       name: 'MuttVue',
       globals: {
         '@mutt/forms': 'Mutt',
