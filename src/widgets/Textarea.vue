@@ -1,11 +1,19 @@
 <template>
-  <div v-if="field" :class="getFieldWrapperClass()">
+  <div
+    v-if="field"
+    :class="getFieldWrapperClass()"
+    :data-qa-locator="getQaLocator"
+  >
     <label-widget
-      v-bind:field="field"
-      v-bind:fieldId="getFieldId()"></label-widget>
+      :field="field"
+      :fieldId="getFieldId()"
+      :data-qa-locator="qaLocator ? `${qaLocator}-label` : null"
+    />
     <readonly-widget
       v-if="isReadOnly"
-      v-bind:value="value"></readonly-widget>
+      :value="value"
+      :data-qa-locator="qaLocator ? `${qaLocator}-readonly` : null"
+    />
     <textarea
       v-if="!isReadOnly"
       ref="textarea"
@@ -15,15 +23,21 @@
       :placeholder="getPlaceholder"
       :aria-invalid="hasErrors ? 'true' : null"
       :aria-describedby="describedBy"
-      v-on:keypress.enter.prevent="submitCallback"
+      :data-qa-locator="getQaLocator ? `${getQaLocator}-textarea` : null"
+      :data-qa-locator="qaLocator ? `${qaLocator}-textarea` : null"
+      @keypress.enter.prevent="submitCallback"
       v-model="value"></textarea>
     <help-widget
-      v-bind:field="field"></help-widget>
+      :field="field"
+      :data-qa-locator="qaLocator ? `${qaLocator}-help` : null"
+    />
     <error-widget
       v-if="!isReadOnly"
-      v-bind:field="field"
-      v-bind:errors="errors"
-      v-bind:errorClass="getErrorClass()"></error-widget>
+      :field="field"
+      :errors="errors"
+      :errorClass="getErrorClass()"
+      :data-qa-locator="qaLocator ? `${qaLocator}-error` : null"
+    />
   </div>
 </template>
 

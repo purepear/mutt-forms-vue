@@ -1,11 +1,19 @@
 <template>
-  <div v-if="field" :class="getFieldWrapperClass()">
+  <div
+    v-if="field"
+    :class="getFieldWrapperClass()"
+    :data-qa-locator="qaLocator"
+  >
     <label-widget
-      v-bind:field="field"
-      v-bind:fieldId="getFieldId()"></label-widget>
+      :field="field"
+      :fieldId="getFieldId()"
+      :data-qa-locator="qaLocator ? `${qaLocator}-label` : null"
+    />
     <readonly-widget
       v-if="isReadOnly"
-      v-bind:value="field.value"></readonly-widget>
+      :value="field.value"
+      :data-qa-locator="qaLocator ? `${qaLocator}-readonly` : null"
+    />
     <div class="mutt-field-choice-wrap select">
       <select
         v-if="!isReadOnly"
@@ -14,29 +22,38 @@
       	:name="field.name"
         :aria-invalid="hasErrors ? 'true' : null"
         :aria-describedby="field.options.hasOwnProperty('help') ? `${getFieldId()}-help` : null"
-        v-on:change="submitCallback"
+        :data-qa-locator="qaLocator ? `${qaLocator}-select` : null"
+        @change="submitCallback"
         v-model="field.value">
         <option
           :selected="field.value === null"
           :value="null"
-          hidden default>
+          hidden default
+          :data-qa-locator="qaLocator ? `${qaLocator}-null-option` : null"
+        >
           {{ getDefaultSelect() }}
         </option>
         <option
           v-for="(option, index) in field.choices"
-          v-bind:key="`option-${option[0]}`"
-          :value="option[0]">
+          :key="`option-${option[0]}`"
+          :value="option[0]"
+          :data-qa-locator="qaLocator ? `${qaLocator}-${index}-option` : null"
+        >
           {{ getOption(option) }}
         </option>
       </select>
     </div>
     <help-widget
-      v-bind:field="field"></help-widget>
+      :field="field"
+      :data-qa-locator="qaLocator ? `${qaLocator}-help` : null"
+    />
     <error-widget
       v-if="!isReadOnly"
-      v-bind:field="field"
-      v-bind:errors="errors"
-      v-bind:errorClass="getErrorClass()"></error-widget>
+      :field="field"
+      :errors="errors"
+      :errorClass="getErrorClass()"
+      :data-qa-locator="qaLocator ? `${qaLocator}-error` : null"
+    />
   </div>
 </template>
 

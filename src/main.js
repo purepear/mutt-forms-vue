@@ -113,12 +113,12 @@ export default {
     Vue.component('mutt-widget', {
       template: `
         <component
-            @callback="callback"
-            :is="getWidget()"
-            v-bind:field="field"
-            v-bind:fieldIndex="fieldIndex"
-            v-bind:readonly="readonly"
-            ></component>
+          @callback="callback"
+          :is="getWidget()"
+          :field="field"
+          :field-index="fieldIndex"
+          :readonly="readonly"
+        />
       `,
       props: [
         'field',

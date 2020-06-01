@@ -1,11 +1,19 @@
 <template>
-  <div v-if="field" :class="getFieldWrapperClass()">
+  <div
+    v-if="field"
+    :class="getFieldWrapperClass()"
+    :data-qa-locator="qaLocator"
+  >
     <label-widget
-      v-bind:field="field"
-      v-bind:fieldId="getFieldId()"></label-widget>
+      :field="field"
+      :fieldId="getFieldId()"
+      :data-qa-locator="qaLocator ? `${qaLocator}-label` : null"
+    />
     <readonly-widget
       v-if="isReadOnly"
-      v-bind:value="field.value"></readonly-widget>
+      :value="field.value"
+      :data-qa-locator="qaLocator ? `${qaLocator}-readonly` : null"
+    />
     <!--
       v-model not used in the input here because of a known issue with
       user interaction and the default Android Chrome keyboard.
@@ -22,16 +30,21 @@
       :name="field.name"
       :aria-invalid="hasErrors ? 'true' : null"
       :aria-describedby="field.options.hasOwnProperty('help') ? `${getFieldId()}-help` : null"
-      v-on:keypress.enter.prevent="submitCallback"
-      v-bind:value="value"
-      v-on:input="value = $event.target.value">
+      :data-qa-locator="qaLocator ? `${qaLocator}-input` : null"
+      @keypress.enter.prevent="submitCallback"
+      :value="value"
+      @input="value = $event.target.value">
     <help-widget
-      v-bind:field="field"></help-widget>
+      :field="field"
+      :data-qa-locator="qaLocator ? `${qaLocator}-help` : null"
+    />
     <error-widget
       v-if="!isReadOnly"
-      v-bind:field="field"
-      v-bind:errors="errors"
-      v-bind:errorClass="getErrorClass()"></error-widget>
+      :field="field"
+      :errors="errors"
+      :errorClass="getErrorClass()"
+      :data-qa-locator="qaLocator ? `${qaLocator}-error` : null"
+    />
   </div>
 </template>
 

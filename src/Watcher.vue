@@ -12,8 +12,8 @@
         class="mutt-watcher__value--object">
         <mutt-watcher
           v-for="objectField of field.object"
-          v-bind:key="objectField.id"
-          v-bind:field="objectField"
+          :key="objectField.id"
+          :field="objectField"
           ></mutt-watcher>
       </span>
       <span
@@ -25,10 +25,10 @@
     <span v-else-if="field.type === 'array'" class="mutt-watcher__value">
       <mutt-watcher
         v-for="slotField of field.slots"
-        v-bind:key="slotField.id"
-        v-bind:field="slotField"
-        v-bind:formatter="getItemFormatter"
-        v-bind:allowLabel="stopLabelPropogation"
+        :key="slotField.id"
+        :field="slotField"
+        :formatter="getItemFormatter"
+        :allowLabel="stopLabelPropogation"
         ></mutt-watcher>
     </span>
     <span v-else class="mutt-watcher__value">

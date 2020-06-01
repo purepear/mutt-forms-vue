@@ -4,23 +4,23 @@
       v-for="(slotField, slotIndex) of field.slots"
       :class="getFieldClass(slotIndex)">
       <mutt-widget
-        v-bind:key="slotField.id"
-        v-bind:field="slotField"
-        v-bind:readonly="readonly"
-        v-on:callback="bubble" />
+        :key="slotField.id"
+        :field="slotField"
+        :readonly="readonly"
+        @callback="bubble" />
       <button
         v-if="hasSlotControls && allowedSlotControls && !readonly"
-        v-on:click.prevent="removeFieldSlot(slotIndex)">
+        @click.prevent="removeFieldSlot(slotIndex)">
         Remove
       </button>
     </div>
     <error-widget
-      v-bind:field="field"
-      v-bind:errors="errors"
-      v-bind:errorClass="getErrorClass()" />
+      :field="field"
+      :errors="errors"
+      :errorClass="getErrorClass()" />
     <div v-if="hasArrayControls && !readonly">
-      <button v-on:click.prevent="appendFieldSlot">+</button>
-      <button v-on:click.prevent="removeFieldSlot()">-</button>
+      <button @click.prevent="appendFieldSlot">+</button>
+      <button @click.prevent="removeFieldSlot()">-</button>
     </div>
   </div>
 </template>

@@ -1,14 +1,14 @@
 <template>
-  <form v-if="form" role="form" v-on:submit.prevent>
+  <form v-if="form" role="form" @submit.prevent>
     <fieldset v-for="fieldset of form.fieldsets">
       <legend v-if="fieldset.label">{{ getFieldsetLegend(fieldset) }}</legend>
       <mutt-widget
         v-for="field of fieldset.fields"
-        v-bind:key="field.id"
-        v-bind:field="field"
-        v-bind:readonly="readonly"
-        v-on:callback="callback"></mutt-widget>
-      <button v-on:click="submit">{{ getSubmitCta }}</button>
+        :key="field.id"
+        :field="field"
+        :readonly="readonly"
+        @callback="callback"></mutt-widget>
+      <button @click="submit">{{ getSubmitCta }}</button>
     </fieldset>
   </form>
 </template>

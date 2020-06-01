@@ -1,10 +1,16 @@
 <template>
-  <div v-if="field" :class="getFieldWrapperClass()">
+  <div
+    v-if="field"
+    :class="getFieldWrapperClass()"
+    :data-qa-locator="qaLocator"
+  >
     <input
       type="hidden"
       :class="getFieldClass()"
-      v-bind:name="field.name"
-      v-model="value">
+      :name="field.name"
+      v-model="value"
+      :data-qa-locator="qaLocator ? `${qaLocator}-input` : null"
+    />
   </div>
 </template>
 

@@ -53,6 +53,36 @@ export default {
       return (this.errors && this.errors.length > 0)
     },
 
+    qaLocatorPrefix() {
+      /*
+        Check if parent element(usually <form>)
+        has "data-qa-locator-prefix" attribute
+      */
+      let parent = this.$parent
+
+      while (parent && !parent.$attrs['data-qa-locator-prefix']) {
+        parent = parent.$parent
+      }
+
+      return parent ? parent.$attrs['data-qa-locator-prefix'] : null
+    },
+
+    qaLocator() {
+      let qaLocator = null
+
+      // Check if we have "attribs.qalocator" in options
+      if (this.field.attribs.hasOwnProperty('qalocator')) {
+        qaLocator = this.field.attribs.qalocator
+      }
+
+      // Check if we have QA locator prefix on a parent element/form
+      if (this.qaLocatorPrefix) {
+        qaLocator = `${this.qaLocatorPrefix}-${qaLocator || this.field.id}`
+      }
+
+      return qaLocator
+    },
+
     getPlaceholder() {
       if (this.field.options.placeholder) {
         return _(this, this.field.options.placeholder)

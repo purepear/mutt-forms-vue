@@ -4,10 +4,11 @@
       <legend v-if="field.label">{{ getLegend() }}</legend>
       <mutt-widget
         v-for="objectField of field.object"
-        v-bind:key="objectField.id"
-        v-bind:field="objectField"
-        v-bind:readonly="readonly"
-        v-on:callback="bubble"></mutt-widget>
+        :key="objectField.id"
+        :field="objectField"
+        :readonly="readonly"
+        @callback="bubble"
+      />
     </fieldset>
   </div>
 </template>

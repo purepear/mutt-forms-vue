@@ -1,13 +1,22 @@
 <template>
-  <div v-if="field" class="mutt-field-wrapper--checkbox" :class="getFieldWrapperClass()">
+  <div
+    v-if="field"
+    class="mutt-field-wrapper--checkbox"
+    :class="getFieldWrapperClass()"
+    :data-qa-locator="qaLocator"
+  >
     <label-widget
-      v-bind:for="field.name"
-      v-bind:field="field"
-      v-bind:class="getLabelClass"
-      v-bind:fieldId="getFieldId()"></label-widget>
+      :for="field.name"
+      :field="field"
+      :class="getLabelClass"
+      :fieldId="getFieldId()"
+      :data-qa-locator="qaLocator ? `${qaLocator}-label` : null"
+    />
     <readonly-widget
       v-if="isReadOnly"
-      v-bind:value="field.value"></readonly-widget>
+      :value="field.value"
+      :data-qa-locator="qaLocator ? `${qaLocator}-readonly` : null"
+    />
     <input
       v-if="!isReadOnly"
       type="checkbox"
@@ -16,15 +25,21 @@
       :name="field.name"
       :aria-invalid="hasErrors ? 'true' : null"
       :aria-describedby="field.options.hasOwnProperty('help') ? `${getFieldId()}-help` : null"
-      v-on:change="submitCallback"
-      v-model="value">
+      :data-qa-locator="qaLocator ? `${qaLocator}-input` : null"
+      @change="submitCallback"
+      v-model="value"
+    />
     <help-widget
-      v-bind:field="field"></help-widget>
+      :field="field"
+      :data-qa-locator="qaLocator ? `${qaLocator}-help` : null"
+    />
     <error-widget
       v-if="!isReadOnly"
-      v-bind:field="field"
-      v-bind:errors="errors"
-      v-bind:errorClass="getErrorClass()"></error-widget>
+      :field="field"
+      :errors="errors"
+      :errorClass="getErrorClass()"
+      :data-qa-locator="qaLocator ? `${qaLocator}-error` : null"
+    />
   </div>
 </template>
 

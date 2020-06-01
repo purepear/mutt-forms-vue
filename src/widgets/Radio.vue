@@ -2,15 +2,20 @@
   <div
     v-if="field"
     class="mutt-field-wrapper--checkbox mutt-field-wrapper--radio"
-    :class="getFieldWrapperClass()">
+    :class="getFieldWrapperClass()"
+    :data-qa-locator="qaLocator"
+  >
     <label-widget
-      v-bind:field="field"
-      v-bind:fieldId="getFieldId()"></label-widget>
+      :field="field"
+      :fieldId="getFieldId()"
+      :data-qa-locator="qaLocator ? `${qaLocator}-label` : null"
+    />
     <div
       v-if="!isReadOnly"
       v-for="(choice, index) of field.choices"
-      v-bind:key="`radio-${choice[0]}`"
-      class="mutt-field-radio-item">
+      :key="`radio-${choice[0]}`"
+      class="mutt-field-radio-item"
+    >
       <input
         type="radio"
         v-model="value"
@@ -19,23 +24,32 @@
         :class="getFieldClass()"
         :aria-invalid="hasErrors ? 'true' : null"
         :aria-describedby="field.options.hasOwnProperty('help') ? `${getFieldId()}-help` : null"
-        v-bind:value="choice[0]"
-        v-on:click="value === choice[0] && select(choice[0], choice[1])"
-        v-on:change="select(choice[0], choice[1])">
+        :data-qa-locator="qaLocator ? `${qaLocator}-${index}-input` : null"
+        :value="choice[0]"
+        @change="select(choice[0], choice[1])"
+      />
       <label
-        v-bind:for="`${field.id}-${choice[0]}`"
-        class="mutt-label">{{ getChoice(choice[1]) }}</label>
+        :for="`${field.id}-${choice[0]}`"
+        class="mutt-label"
+        :data-qa-locator="qaLocator ? `${qaLocator}-${index}-label` : null"
+      >{{ getChoice(choice[1]) }}</label>
     </div>
     <readonly-widget
       v-if="isReadOnly"
-      v-bind:value="readonlyLabel"></readonly-widget>
+      :value="field.value"
+      :data-qa-locator="qaLocator ? `${qaLocator}-readonly` : null"
+    />
     <help-widget
-      v-bind:field="field"></help-widget>
+      :field="field"
+      :data-qa-locator="qaLocator ? `${qaLocator}-help` : null"
+    />
     <error-widget
       v-if="!isReadOnly"
-      v-bind:field="field"
-      v-bind:errors="errors"
-      v-bind:errorClass="getErrorClass()"></error-widget>
+      :field="field"
+      :errors="errors"
+      :errorClass="getErrorClass()"
+      :data-qa-locator="qaLocator ? `${qaLocator}-error` : null"
+    />
   </div>
 </template>
 

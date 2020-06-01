@@ -1,9 +1,10 @@
 <template>
   <span
     v-if="field.options.hasOwnProperty('help')"
-    v-bind:id="`${getFieldId()}-help`"
+    :id="`${getFieldId()}-help`"
     class="mutt-help"
-    v-html="getHelp"></span>
+    v-html="getHelp"
+  />
 </template>
 
 <script>
