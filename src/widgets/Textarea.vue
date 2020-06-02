@@ -2,7 +2,7 @@
   <div
     v-if="field"
     :class="getFieldWrapperClass()"
-    :data-qa-locator="getQaLocator"
+    :data-qa-locator="qaLocator"
   >
     <label-widget
       :field="field"
@@ -23,7 +23,6 @@
       :placeholder="getPlaceholder"
       :aria-invalid="hasErrors ? 'true' : null"
       :aria-describedby="describedBy"
-      :data-qa-locator="getQaLocator ? `${getQaLocator}-textarea` : null"
       :data-qa-locator="qaLocator ? `${qaLocator}-textarea` : null"
       @keypress.enter.prevent="submitCallback"
       v-model="value"></textarea>
