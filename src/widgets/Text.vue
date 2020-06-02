@@ -33,7 +33,8 @@
       :data-qa-locator="qaLocator ? `${qaLocator}-input` : null"
       @keypress.enter.prevent="submitCallback"
       :value="value"
-      @input="value = $event.target.value">
+      @input="value = $event.target.value"
+    />
     <help-widget
       :field="field"
       :data-qa-locator="qaLocator ? `${qaLocator}-help` : null"

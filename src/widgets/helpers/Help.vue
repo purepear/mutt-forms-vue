@@ -4,7 +4,7 @@
     :id="`${getFieldId()}-help`"
     class="mutt-help"
     v-html="getHelp"
-  />
+  ></span>
 </template>
 
 <script>
